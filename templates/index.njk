@@ -388,5 +388,39 @@
 
   {% include "_partials/footer.njk" %}
   {% include "_partials/scripts.njk" %}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "BlockRocket",
+    "url": "{{ site.url }}",
+    "logo": "{{ site.url }}/images/logo_2.svg",
+    "description": "Expert-led Web3 consultancy based in Manchester. Blockchain strategy, smart contract engineering, and decentralised systems since 2018.",
+    "foundingDate": "2018",
+    "foundingLocation": "Manchester, UK",
+    "email": "human@blockrocket.tech",
+    "sameAs": [
+      "https://www.linkedin.com/company/blockrockettech/",
+      "https://twitter.com/blockrockettech",
+      "https://medium.com/blockrocket",
+      "https://github.com/blockrockettech"
+    ],
+    "founders": [
+      {
+        "@type": "Person",
+        "name": "Andy Gray",
+        "url": "https://uk.linkedin.com/in/andrewmgray",
+        "jobTitle": "Co-Founder"
+      },
+      {
+        "@type": "Person",
+        "name": "James Morgan",
+        "url": "https://uk.linkedin.com/in/jamesemorgan",
+        "jobTitle": "Co-Founder"
+      }
+    ]
+  }
+  </script>
 </body>
 </html>

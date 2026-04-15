@@ -122,18 +122,37 @@ function build() {
   // Render each post page
   for (const post of posts) {
     const relatedPosts = posts.filter(p => p.slug !== post.slug).slice(0, 3);
-    const html = nunjucks.render('post.njk', { post, relatedPosts, site: siteConfig });
+    const html = nunjucks.render('post.njk', {
+      post,
+      relatedPosts,
+      site: siteConfig,
+      pageUrl: post.url,
+      ogType: 'article',
+      ogArticlePublishedTime: post.date instanceof Date
+        ? post.date.toISOString()
+        : new Date(String(post.date) + 'T12:00:00').toISOString(),
+    });
     fs.writeFileSync(path.join(DIST_DIR, 'blog', `${post.slug}.html`), html);
     console.log(`[build]   /blog/${post.slug}.html`);
   }
 
   // Render blog listing page
-  const blogHtml = nunjucks.render('blog.njk', { posts, featuredPost, allTags, site: siteConfig });
+  const blogHtml = nunjucks.render('blog.njk', {
+    posts,
+    featuredPost,
+    allTags,
+    site: siteConfig,
+    pageUrl: '/blog/index.html',
+  });
   fs.writeFileSync(path.join(DIST_DIR, 'blog', 'index.html'), blogHtml);
   console.log('[build]   /blog/index.html');
 
   // Render landing page
-  const indexHtml = nunjucks.render('index.njk', { latestPosts, site: siteConfig });
+  const indexHtml = nunjucks.render('index.njk', {
+    latestPosts,
+    site: siteConfig,
+    pageUrl: '/',
+  });
   fs.writeFileSync(path.join(DIST_DIR, 'index.html'), indexHtml);
   console.log('[build]   /index.html');
 
