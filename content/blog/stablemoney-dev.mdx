@@ -1,0 +1,45 @@
+---
+title: 'StableMoney.dev: A Technical Reference for Engineers Building with Stablecoins'
+excerpt: We shipped a public engineering surface for stablecoins—networks, contracts, EIP patterns, compliance hooks, and risk—so teams can compare implementations without drowning in marketing PDFs.
+date: '2026-04-01'
+thumbLabel: Stablecoins
+readTime: 6 min read
+tags:
+  - label: Product
+    highlight: true
+  - label: Stablecoins
+  - label: Engineering
+---
+
+[**StableMoney.dev**](https://stablemoney.dev/) is a **technical reference** we built for anyone integrating, auditing, or architecting around **stablecoins**. The goal is simple: cut through ticker hype and give engineers a **structured view** of how major stablecoins actually behave on-chain—**which networks they live on**, which **EIP/ERC patterns** they use, and what **collateral and compliance** models sit underneath.
+
+## Why we built it
+
+Stablecoins are the default **liquidity and settlement layer** for most Web3 products, yet the details that matter to builders scatter across docs sites, forums, and chain explorers. Product and protocol teams repeatedly ask the same classes of questions:
+
+- Where is this asset **deployed**, and is that deployment the one we should integrate?  
+- Does it support **permit**, **upgradeable proxies**, or other patterns our wallet/SDK needs to handle?  
+- How do **issuer-backed**, **on-chain/RWA**, **synthetic**, and **treasury/mixed** designs differ in **risk and operational** terms?
+
+[StableMoney.dev](https://stablemoney.dev/) answers those questions in one place—with **comparison matrices** and **curated notes** rather than a wall of unstructured links.
+
+## What you’ll find on the site
+
+- **Market snapshot** — Aggregated **total market cap** (stablecoin universe, via DefiLlama), **coins tracked** (a focused set of major issuances—**12** on the current build), **networks covered** (**22+**), and **refresh cadence**. The stack is **hybrid**: **market and chain data** on a **daily** refresh, with **EIP/ERC and risk** content **manually curated**. *Cap and rankings move every day—**[stablemoney.dev](https://stablemoney.dev/)** shows the live totals and “last refreshed” stamps.*  
+- **EIP/ERC standards & compliance matrix** — Side-by-side view of how leading stablecoins line up on **ERC-20**, **permit**, **proxy/upgrade patterns**, **compliance-related** interfaces, **flash-loan** exposure where relevant, and related **engineering dimensions**—so you can diff implementations before you commit to an integration.  
+- **Taxonomy** — Coins grouped by **model**: e.g. **fiat / issuer reserves**, **on-chain & RWA collateral**, **synthetic / delta-neutral**, **treasury / mixed**—matching how risk and operations teams actually think about the stack.  
+- **Per-asset drill-down** — Issuer, **chains listed**, **EIP count**, and pointers into the matrix row for that asset.
+
+The footer is explicit about provenance: **market cap and chain coverage** are **sourced from [DefiLlama](https://defillama.com/)**; **EIP/ERC analysis, contract detail, and risk framing** are **hand-curated**—because automation alone will not tell you whether a given deployment matches *your* custody and compliance posture.
+
+## Who it is for
+
+- **Smart contract and backend engineers** choosing a stablecoin for treasuries, vaults, or DEX routes.  
+- **Wallet and SDK teams** validating **permit**, **allowance**, and **upgrade** behaviour.  
+- **Founders and PMs** who need a **credible technical map** before legal and treasury sign off.
+
+## Built in Manchester
+
+[StableMoney.dev](https://stablemoney.dev/) is **from Manchester** and shipped by **[BlockRocket](https://blockrocket.tech/)**—the same team behind this site. If you want to follow updates or argue about a row in the matrix, we’re on X at [@BlockRocketTech](https://x.com/blockrockettech).
+
+**→ Open the reference:** [stablemoney.dev](https://stablemoney.dev/)

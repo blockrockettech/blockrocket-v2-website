@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% set pageTitle = post.title + " | BlockRocket" %}
+  {% set pageDescription = post.excerpt %}
+  {% include "_partials/head.njk" %}
+</head>
+<body class="body">
+  {% set isHome = false %}
+  {% include "_partials/nav.njk" %}
+
+  <div id="hero" class="section_header">
+    <div data-aos="fade-up" class="container blog-child-header">
+      <div class="breadcrumb-wrapper">
+        <a href="/" class="breadcrumb-link">Home</a><img src="/images/chevron_1.svg" loading="lazy" width="16" height="16" alt="" class="icon_chevron">
+        <a href="/blog/index.html" class="breadcrumb-link">Blogs</a><img src="/images/chevron_1.svg" loading="lazy" width="16" height="16" alt="" class="icon_chevron">
+        <span class="breadcrumb-link active-page">{{ post.title }}</span>
+      </div>
+      <div data-aos="fade-up" class="blog-title-wrapper">
+        <h2 class="h2-style">{{ post.title }}</h2>
+        <div class="w-layout-vflex lead-text">
+          <p class="body-regular left">{{ post.excerpt }}</p>
+        </div>
+      </div>
+      <div class="w-layout-hflex blog-details-wrapper">
+        <div class="blog-details-row">
+          <div class="read-time"><img src="/images/white-time.svg" loading="lazy" width="20" height="20" alt="" class="time">
+            <div class="details-txt white">{{ post.readTime }}</div>
+          </div>
+          <div class="date-published"><img src="/images/white-calendar.svg" loading="lazy" width="20" height="20" alt="" class="time">
+            <div class="details-txt">{{ post.date | formatDate }}</div>
+          </div>
+        </div>
+        <div class="blog-tag-row">
+          {% for tag in post.tags %}
+          <div class="blog-tag white">
+            <div class="tag-txt">{{ tag.label }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <img src="/images/half-blocks-left.png" loading="lazy" data-aos="fade-up" alt="" class="left-half-block blog">
+    <img src="/images/half-blocks-right.png" loading="lazy" data-aos="fade-up" alt="" class="right-half-block blog">
+  </div>
+
+  {% if post.coverImage %}
+  <div class="section_featured-image">
+    <div data-aos="fade-up" class="featured-img-wrapper">
+      <div data-aos="fade-up" class="featured-image" style="background-image: url('/images/{{ post.coverImage }}')"></div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div id="services" data-aos="fade-up" class="section-blog-content">
+    <div class="blog-content-grid">
+      <div data-aos="fade-up" class="blog-rich-text w-richtext">
+        {{ post.content | safe }}
+      </div>
+      <div class="content-right">
+        <div data-aos="fade-up" class="side-panel">
+          <div class="social-share">
+            <div class="black-eyebrow blog-panel">SHARE THIS ARTICLE</div>
+            <div class="social-icons-wrapper">
+              <a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ post.url }}&text={{ post.title | urlencode }}" target="_blank" rel="noopener" class="share-icon-wrapper w-inline-block"><img src="/images/x.svg" loading="lazy" width="24" height="24" alt="Share on X" class="social-icon"></a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ post.url }}" target="_blank" rel="noopener" class="share-icon-wrapper w-inline-block"><img src="/images/linkedin.svg" loading="lazy" width="24" height="24" alt="Share on LinkedIn" class="social-icon"></a>
+              <a href="https://t.me/share/url?url={{ site.url }}{{ post.url }}&text={{ post.title | urlencode }}" target="_blank" rel="noopener" class="share-icon-wrapper w-inline-block"><img src="/images/telegram.svg" loading="lazy" width="24" height="24" alt="Share on Telegram" class="social-icon"></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}" target="_blank" rel="noopener" class="share-icon-wrapper w-inline-block"><img src="/images/facebook.svg" loading="lazy" width="24" height="24" alt="Share on Facebook" class="social-icon"></a>
+              <a href="https://reddit.com/submit?url={{ site.url }}{{ post.url }}&title={{ post.title | urlencode }}" target="_blank" rel="noopener" class="share-icon-wrapper w-inline-block"><img src="/images/reddit.svg" loading="lazy" width="24" height="24" alt="Share on Reddit" class="social-icon"></a>
+            </div>
+          </div>
+          {% if post.headings | length %}
+          <div class="jump-to">
+            <div class="black-eyebrow blog-panel">JUMP TO</div>
+            <div class="jump-to">
+              {% for heading in post.headings %}
+              <a href="#{{ heading.id }}" class="blog-link">{{ heading.text }}</a>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if relatedPosts | length %}
+  <div class="section-read-more">
+    <div class="read-more-wrapper">
+      <div class="module-eyebrow"><img src="/images/black-icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
+        <div class="black-eyebrow">READ MORE</div>
+      </div>
+      <div data-aos="fade-up" class="read-more-grid blog">
+        {% for related in relatedPosts %}
+        <a data-aos="fade-up" href="{{ related.url }}" class="blog-card dark w-inline-block">
+          <img src="{{ '/images/' + related.coverImage if related.coverImage else '/images/news-img-block-2_1news-img-block-2.avif' }}"
+               loading="lazy" alt="{{ related.title }}" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-title dark">{{ related.title }}</div>
+            <div class="body-regular left black">{{ related.excerpt }}</div>
+          </div>
+          <div class="blog-tag-row">
+            {% for tag in related.tags %}
+            <div class="blog-tag dark">
+              <div class="tag-txt black">{{ tag.label }}</div>
+            </div>
+            {% endfor %}
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% include "_partials/footer.njk" %}
+  {% include "_partials/scripts.njk" %}
+</body>
+</html>

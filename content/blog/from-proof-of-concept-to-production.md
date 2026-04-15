@@ -1,0 +1,32 @@
+---
+title: "From Proof of Concept to Production: Full-Stack Web3 Delivery"
+excerpt: How we work with teams from "can decentralised tech help?" through strategy, smart contracts, and shipping—mirroring BlockRocket's consultancy and engineering practice on blockrocket.tech.
+date: "2024-05-30"
+thumbLabel: Consultancy
+readTime: 8 min read
+tags:
+  - label: Services
+    highlight: true
+  - label: Smart Contracts
+  - label: Product
+---
+
+## Consultancy & product strategy
+
+Most teams do not need a chain; they need **clarity**. We start with the decision that would hurt most if it were wrong: issuance model, custody, regulatory posture, or technical architecture. **Product delivery and strategy** means saying no to hype-shaped roadmaps.
+
+## Full-stack engineering
+
+**From proof of concept to production** is not a longer hackathon. It is observability, key management, upgrades (where possible), CI, and runbooks. Solutions really do come in **all shapes and sizes**—we match depth to risk, not to billable hours theatre.
+
+## Smart contracts
+
+**Design, implementation, test, and auditing**—against standards like **ERC-20**, **ERC-721**, and **ERC-1155** when fungibility, NFTs, or hybrid inventories fit. The goal is **correctness and operability**, not novelty per se.
+
+## Training & education
+
+**What are decentralised technologies?** is still the right question for boards, communities, and engineers. We use workshops, writing, and speaking so teams share a **non-dogmatic** vocabulary before capital commits.
+
+## If you are starting now
+
+Bring a **concrete workflow**—who does what, today, with which systems—and we will show where decentralised components remove trust bottlenecks and where they would only add cost. That is the use case lens we have applied since **Manchester** and the early Ethereum ecosystem—and it scales from startups to global brands.
