@@ -1,0 +1,82 @@
+---
+title: "EthSync: Real-Time Monitoring for Ethereum's Sync Committee"
+excerpt: "We built ethsync.wtf to make Ethereum's Sync Committee visible — a live dashboard tracking validator participation, BLS signature aggregation, and light client health in real time."
+date: '2026-04-28'
+thumbLabel: Open Source Tool
+readTime: 6 min read
+tags:
+  - label: Ethereum
+    highlight: true
+  - label: Open Source
+  - label: Infrastructure
+---
+
+When Ethereum completed [The Merge](https://ethereum.org/en/roadmap/merge/) and moved to Proof of Stake, it didn't just swap consensus mechanisms — it introduced an entirely new piece of protocol machinery called the **Sync Committee**. It's foundational to how light clients work, yet almost nobody watches it in real time.
+
+We built [ethsync.wtf](https://ethsync.wtf/) to fix that.
+
+## What is the Sync Committee?
+
+The Sync Committee is a group of **512 validators** randomly selected every ~27 hours (256 epochs) to serve a specific role: they sign the most recent beacon chain block header with their BLS keys, and those signatures are aggregated into a compact proof.
+
+That proof is what allows **light clients** — wallets, mobile apps, browser extensions, and embedded devices — to trustlessly verify chain state without downloading the full chain. Light clients check that a supermajority of the Sync Committee signed off on a given block head, and use that as their source of truth.
+
+It's a critical piece of Ethereum's trust model, particularly as the ecosystem pushes toward truly decentralised, self-sovereign clients that don't rely on centralised RPC providers.
+
+## Why participation rates matter
+
+Sync Committee participation isn't just a vanity metric. If too many of the 512 selected validators go offline or fail to sign, the aggregated signature becomes weaker — and light clients may struggle to verify chain state reliably.
+
+The Ethereum spec expects a **near-perfect participation rate** under normal network conditions. Drops in participation can indicate:
+
+- Validator client bugs or misconfigurations
+- Network partitions affecting a cohort of validators
+- Infrastructure issues at a specific operator or cloud region
+- Protocol-level edge cases in BLS aggregation
+
+Watching the numbers over time builds intuition about what "healthy" looks like — and helps surface anomalies before they become problems.
+
+## What ethsync.wtf shows
+
+The dashboard updates every **12 seconds** (one Ethereum slot) and surfaces:
+
+- **Current sync committee slot** and epoch progress
+- **Live participation rate** — how many of the 512 validators are actively signing
+- **BLS aggregation metrics** — the quality and completeness of the aggregated signature
+- **Beacon node connectivity** — chain head data via the standard Beacon API, powered by [PublicNode](https://publicnode.com/) infrastructure
+
+Everything is read-only and runs directly against the Ethereum consensus layer. There's no middleware database, no proprietary indexing, no API keys required — just a live feed from the protocol itself.
+
+## The light client angle
+
+The Sync Committee exists *because* of light clients. Post-Merge Ethereum separates the data availability problem (full nodes) from the trust verification problem (light clients). The Sync Committee bridges the gap: a rotating group of validators whose BLS signatures are cheap to verify but expensive to forge.
+
+This design enables a category of applications that couldn't exist before:
+- Mobile wallets that verify their own RPC responses
+- Browser-based dApps that don't blindly trust Infura or Alchemy
+- Hardware wallets that can check chain state offline
+- Cross-chain bridges that verify Ethereum state without a full node
+
+Monitoring the Sync Committee is, in a sense, monitoring the health of that entire light-client trust chain.
+
+## Why we built it
+
+At BlockRocket we spend a lot of time building on Ethereum infrastructure — writing smart contracts, indexing on-chain data, and debugging consensus-layer edge cases. During some work on light client integrations we kept asking the same question: *is the Sync Committee actually healthy right now?*
+
+There was no quick answer. The Beacon API exposes all the raw data, but turning it into a readable, updating dashboard takes work. We built ethsync.wtf as a sharp tool to answer that question at a glance.
+
+It's also a useful educational reference. The Sync Committee is well-documented in the [Ethereum consensus specs](https://github.com/ethereum/consensus-specs), but seeing the numbers move in real time connects the theory to the practice in a way static docs can't.
+
+## Technical notes
+
+The dashboard speaks directly to the [Beacon Node API](https://ethereum.github.io/beacon-APIs/) — specifically the `/eth/v1/beacon/states/{state_id}/sync_committees` and related endpoints. Slot timing comes from the chain's own genesis data, so there's no clock-skew issue. The 12-second refresh aligns to the Ethereum slot interval, so you're always seeing the latest attested data.
+
+BLS signature aggregation is handled entirely on-chain by the validators themselves — the dashboard just reads the result. The underlying crypto is [BLS12-381](https://hackmd.io/@benjaminion/bls12-381), the same curve used throughout Ethereum's consensus layer.
+
+## Try it
+
+**[ethsync.wtf](https://ethsync.wtf/)** — no wallet, no login, no setup. Just Ethereum's Sync Committee, live.
+
+If you're building light client integrations, validator tooling, or anything that depends on the Ethereum consensus layer behaving correctly, keep a tab open. It's a good signal.
+
+For questions or feedback, reach out via [blockrocket.tech](https://blockrocket.tech/).
