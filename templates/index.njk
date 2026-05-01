@@ -5,7 +5,7 @@
   {% set pageDescription = "High-performance blockchain solutions for enterprise and startups. From smart contract auditing to full-stack Web3 engineering, we build production-ready systems." %}
   {% include "_partials/head.njk" %}
 </head>
-<body class="body">
+<body class="body" data-screen-label="Home">
   {% set isHome = true %}
   {% include "_partials/nav.njk" %}
 
@@ -13,13 +13,13 @@
     <div class="container">
       <div data-aos="fade-up" class="main-content">
         <div class="w-layout-vflex top-content-wrapper">
-          <div class="eyebrow">ACCELERATING WEB3 TRANSFORMATION</div>
-          <h1 class="heading-1">Engineering the On-Chain Future.</h1>
+          <div class="eyebrow">{{ home.hero.eyebrow }}</div>
+          <h1 class="heading-1">{{ home.hero.heading }}</h1>
           <div class="lead-text">
-            <div class="lead-text centre"><span class="text-regular">BlockRocket is a </span><span class="text-bold">expert-led Web3 consultancy.</span><span class="text-regular"> Since 2018, we've been helping businesses navigate the transition from </span><span class="text-bold">legacy systems</span><span class="text-regular"> to </span><span class="text-bold">decentralised reality.</span></div>
+            <div class="lead-text centre">{{ home.hero.lead | spanBold | safe }}</div>
           </div>
         </div>
-        <a href="#contact" class="primary-button w-button">Start a Conversation Today</a>
+        <a href="#contact" class="primary-button w-button">{{ home.hero.cta }}</a>
       </div>
       <div data-aos="fade-up" class="logo-wrapper">
         <div class="small-eyebrow">...MAKING IMPACT WITH...</div>
@@ -38,30 +38,29 @@
       <div class="flex-grid">
         <div data-aos="fade-up" class="left-col-wrapper">
           <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-            <div class="green-eyebrow">est. 2018...</div>
+            <div class="green-eyebrow">{{ home.about.eyebrow }}</div>
           </div>
-          <div class="h2-style">Empowering businesses to navigate Web3 through expert education, veteran engineering, and practical blockchain transformation.</div>
+          <div class="h2-style">{{ home.about.heading }}</div>
           <div class="w-layout-vflex lead-text">
-            <p class="body-regular left">We take a holistic view of the Web3 landscape. By combining <span class="body-bold">deep technical proficiency</span> with a strategic advisory mindset, we ensure your project is built on a foundation of security and scalability. From initial onboarding workshops to the final smart contract deployment, <span class="body-bold">our team handles the heavy lifting so you can focus on your core business value.</span></p>
-            <p class="body-regular left">BlockRocket works with <span class="body-bold">individuals and organisations</span> navigating decentralised systems where security, correctness, and long-term thinking matter.</p>
-            <p class="body-regular left">From private self-custody and DeFi onboarding to large-scale decentralised infrastructure, we help clients <span class="body-bold">operate safely at the frontier.</span></p>
+            {% for para in home.about.paragraphs %}
+            <p class="body-regular left">{{ para | bodyBold | safe }}</p>
+            {% endfor %}
           </div>
         </div>
-        <img data-aos="fade-up" class="image" src="/images/nft-img_1nft-img.avif" alt="Speaker presenting on stage with large posters behind him asking 'WTF is an NFT' at the Manchester Art Fair." sizes="(max-width: 1659px) 100vw, 1659px" loading="lazy" srcset="/images/nft-img_1-p-500.avif 500w, /images/nft-img_1nft-img.avif 1659w">
+        <img data-aos="fade-up" class="image" src="/images/nft-img_1nft-img.avif" alt="{{ home.about.imageAlt }}" sizes="(max-width: 1659px) 100vw, 1659px" loading="lazy" srcset="/images/nft-img_1-p-500.avif 500w, /images/nft-img_1nft-img.avif 1659w">
       </div>
     </div>
     <div class="container">
       <div class="flex-grid">
-        <img data-aos="fade-up" class="image" src="/images/manchester_1manchester.avif" alt="Urban canal scene with historic brick buildings, industrial bridges, and modern skyscrapers in the background under a cloudy sky." sizes="(max-width: 1106px) 100vw, 1106px" id="w-node-eac2862a-6122-f9a0-c1ec-77d6ff313d49-f86bc39c" loading="lazy" srcset="/images/manchester_1-p-500.avif 500w, /images/manchester_1manchester.avif 1106w">
+        <img data-aos="fade-up" class="image" src="/images/manchester_1manchester.avif" alt="{{ home.aboutHistory.imageAlt }}" sizes="(max-width: 1106px) 100vw, 1106px" id="w-node-eac2862a-6122-f9a0-c1ec-77d6ff313d49-f86bc39c" loading="lazy" srcset="/images/manchester_1-p-500.avif 500w, /images/manchester_1manchester.avif 1106w">
         <div data-aos="fade-up" class="left-col-wrapper">
           <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-            <div class="green-eyebrow">From Community to Core Engineering</div>
+            <div class="green-eyebrow">{{ home.aboutHistory.eyebrow }}</div>
           </div>
           <div class="w-layout-vflex lead-text">
-            <p class="body-regular left">BlockRocket didn&#x27;t start in a boardroom; it started in the <span class="body-bold">trenches of the Manchester tech scene.</span> Our story is rooted in the belief that decentralisation is the most significant architectural shift of our generation. We don&#x27;t just advise on Web3—we lived its evolution.<br></p>
-            <p class="body-regular left">What began as a bedroom project evolved into KnownOrigin, a platform that <span class="body-bold">sparked a global crypto-art movement.</span> We navigated the complexities of scaling a decentralised ecosystem, raised venture capital, and ultimately <span class="body-bold">led the platform through its acquisition by eBay.</span></p>
-            <p class="body-regular left">Following the acquisition, Andy and James transitioned to shaping global Web3 strategy at the highest level. However, the mission remained clear: returning to their first love of working directly with innovators. </p>
-            <p class="body-regular left">Today, BlockRocket applies those &quot;battle-tested&quot; insights to help you navigate a landscape where we have already seen—and built—what comes next.</p>
+            {% for para in home.aboutHistory.paragraphs %}
+            <p class="body-regular left">{{ para | bodyBold | safe }}</p>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -74,40 +73,33 @@
     <div class="container approach">
       <div data-aos="fade-up" class="header-wrapper">
         <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-          <div class="green-eyebrow">our approach</div>
+          <div class="green-eyebrow">{{ home.approach.eyebrow }}</div>
         </div>
-        <h2 class="h2-style">The BlockRocket Way</h2>
+        <h2 class="h2-style">{{ home.approach.heading }}</h2>
         <div class="w-layout-vflex lead-text">
-          <p class="body-regular left">Successful blockchain transformation isn't easy. We provide the foresight gained from years in the ecosystem to ensure your architecture is resilient. We prioritise technical excellence and future-proof scaling in a landscape that never stands still.</p>
+          <p class="body-regular left">{{ home.approach.lead }}</p>
         </div>
       </div>
       <div class="_3-col-wrapper">
-        <div data-aos="fade-up" class="w-layout-hflex card-wrapper one">
-          <div class="col-card"><img src="/images/icons/SVG/discovery.svg" loading="lazy" width="81" height="79" alt="Discovery icon" class="card-img">
+        {% for step in home.approach.steps %}
+        {% if loop.index == 1 %}
+        <div data-aos="fade-up" class="w-layout-hflex card-wrapper{{ ' ' + step.wrapperClass if step.wrapperClass }}">
+        {% else %}
+        <div data-aos-delay="{{ (loop.index - 1) * 200 }}" data-aos="fade-up" class="w-layout-hflex card-wrapper{{ ' ' + step.wrapperClass if step.wrapperClass }}">
+        {% endif %}
+          <div class="col-card"><img src="/images/{{ step.icon }}" loading="lazy" width="81" height="79" alt="{{ step.iconAlt }}" class="card-img">
             <div class="card-content-wrapper">
-              <h3 class="card-header">01. Discovery</h3>
-              <div class="body-regular left small">We start by understanding your business, your constraints, and where decentralised technology genuinely adds value. No assumptions — just honest, experienced assessment of what to build and why.</div>
+              <h3 class="card-header">{{ step.number }}. {{ step.title }}</h3>
+              <div class="body-regular left small">{{ step.body }}</div>
             </div>
           </div>
         </div>
+        {% if loop.index == 1 %}
         <img src="/images/connector.svg" loading="lazy" width="169.5" height="44.00000762939453" alt="" data-aos-delay="100" data-aos="fade-up" class="connector">
-        <div data-aos-delay="200" data-aos="fade-up" class="w-layout-hflex card-wrapper two">
-          <div class="col-card"><img src="/images/icons/SVG/planning.svg" loading="lazy" width="81" height="79" alt="Planning icon" class="card-img">
-            <div class="card-content-wrapper">
-              <h3 class="card-header">02. Planning</h3>
-              <div class="body-regular left small">Architecture, token economics, protocol selection, team structure — we design the blueprint before a single line of code is written, so your build is grounded in the right foundations from day one.</div>
-            </div>
-          </div>
-        </div>
+        {% elif loop.index == 2 %}
         <img src="/images/connector_1.svg" loading="lazy" width="169.5" height="44.00000762939453" alt="" data-aos-delay="300" data-aos="fade-up" class="connector">
-        <div data-aos-delay="400" data-aos="fade-up" class="w-layout-hflex card-wrapper">
-          <div class="col-card"><img src="/images/icons/SVG/delivery.svg" loading="lazy" width="81" height="79" alt="Delivery icon" class="card-img">
-            <div class="card-content-wrapper">
-              <h3 class="card-header">03. Delivery</h3>
-              <div class="body-regular left small">We ship production-grade smart contracts and decentralised systems with security-first engineering, thorough testing, and clear handover — built to last, not just to launch.</div>
-            </div>
-          </div>
-        </div>
+        {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -116,97 +108,35 @@
     <div class="container services">
       <div data-aos="fade-up" class="header-wrapper">
         <div class="module-eyebrow"><img src="/images/black-icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-          <div class="black-eyebrow">services</div>
+          <div class="black-eyebrow">{{ home.services.eyebrow }}</div>
         </div>
-        <h2 class="h2-style black">The BlockRocket Way</h2>
+        <h2 class="h2-style black">{{ home.services.heading }}</h2>
         <div class="w-layout-vflex lead-text">
-          <p class="body-regular left black">Successful blockchain transformation isn't easy. We provide the foresight gained from years in the ecosystem to ensure your architecture is resilient. We prioritise technical excellence and future-proof scaling in a landscape that never stands still.</p>
+          <p class="body-regular left black">{{ home.services.lead }}</p>
         </div>
       </div>
       <div class="card-grid">
+        {% for svc in home.services.items %}
         <div data-aos="fade-up" class="card">
-          <div class="img-and-header"><img src="/images/icons/SVG/strategy-and-advisory.svg" loading="lazy" width="109" height="106" alt="Strategy and advisory icon" class="image-5">
+          <div class="img-and-header"><img src="/images/{{ svc.icon }}" loading="lazy" width="109" height="106" alt="{{ svc.iconAlt }}" class="image-5">
             <div class="card-header-wrapper">
-              <div class="service-card-title">Decentralised Strategy &amp; Product Advisory</div>
+              <div class="service-card-title">{{ svc.title }}</div>
             </div>
           </div>
           <div class="card-header-wrapper">
-            <div class="subtitle black">For founders, executives, boards</div>
-            <div class="body-regular left black">Independent advisory on where decentralised systems actually create durable advantage.</div>
+            <div class="subtitle black">{{ svc.subtitle }}</div>
+            <div class="body-regular left black">{{ svc.body }}</div>
           </div>
           <div class="card-list-wrapper">
-            <div class="subtitle black">What this covers</div>
+            <div class="subtitle black">{{ svc.listHeading }}</div>
             <ul role="list" class="list w-list-unstyled">
-              <li class="list-item"><div class="list-text">Web3 / DeFi / tokenisation strategy</div></li>
-              <li class="list-item"><div class="list-text">Build vs buy vs partner decisions</div></li>
-              <li class="list-item"><div class="list-text">Market sizing, timing, and regulatory context</div></li>
-              <li class="list-item"><div class="list-text">Protocol selection &amp; architectural trade-offs</div></li>
-              <li class="list-item"><div class="list-text">AI × Crypto intersections (agents, verification, automation, authentication).</div></li>
+              {% for item in svc.listItems %}
+              <li class="list-item"><div class="list-text">{{ item }}</div></li>
+              {% endfor %}
             </ul>
           </div>
         </div>
-        <div data-aos="fade-up" class="card">
-          <div class="img-and-header"><img src="/images/icons/SVG/systems-and-smart-contracts.svg" loading="lazy" width="109" height="106" alt="Systems and smart contracts icon" class="image-5">
-            <div class="card-header-wrapper">
-              <div class="service-card-title">Decentralised Systems &amp; Smart Contract Engineering</div>
-            </div>
-          </div>
-          <div class="card-header-wrapper">
-            <div class="subtitle black">From architecture to production-grade infrastructure</div>
-            <div class="body-regular left black">Designing and building secure, scalable decentralised systems — when software alone isn't enough.</div>
-          </div>
-          <div class="card-list-wrapper">
-            <div class="subtitle black">What this covers</div>
-            <ul role="list" class="list w-list-unstyled">
-              <li class="list-item"><div class="list-text">Smart contract architecture &amp; implementation</div></li>
-              <li class="list-item"><div class="list-text">Token standards (ERC-20, ERC-721, ERC-1155, beyond)</div></li>
-              <li class="list-item"><div class="list-text">L2 / rollup strategies</div></li>
-              <li class="list-item"><div class="list-text">Indexing, off-chain services, and integration</div></li>
-              <li class="list-item"><div class="list-text">Security-first delivery (testing, review, threat modelling)</div></li>
-            </ul>
-          </div>
-        </div>
-        <div data-aos="fade-up" class="card">
-          <div class="img-and-header"><img src="/images/icons/SVG/private-defi.svg" loading="lazy" width="109" height="106" alt="Private DeFi icon" class="image-5">
-            <div class="card-header-wrapper">
-              <div class="service-card-title">Private DeFi, Self-Custody &amp; Digital Asset Stewardship</div>
-            </div>
-          </div>
-          <div class="card-header-wrapper">
-            <div class="subtitle black">For HNWIs, founders, family offices</div>
-            <div class="body-regular left black">Bespoke onboarding into self-custody and decentralised finance, designed for people who actually hold value.</div>
-          </div>
-          <div class="card-list-wrapper">
-            <div class="subtitle black">What this covers</div>
-            <ul role="list" class="list w-list-unstyled">
-              <li class="list-item"><div class="list-text">Personal custody architecture (hardware, multisig, recovery)</div></li>
-              <li class="list-item"><div class="list-text">Key management strategy &amp; threat modelling</div></li>
-              <li class="list-item"><div class="list-text">Stablecoins, yield primitives, and risk-managed DeFi exposure</div></li>
-              <li class="list-item"><div class="list-text">Safe interaction patterns &amp; operational hygiene</div></li>
-              <li class="list-item"><div class="list-text">Education grounded in real usage, not theory</div></li>
-            </ul>
-          </div>
-        </div>
-        <div data-aos="fade-up" class="card">
-          <div class="img-and-header"><img src="/images/icons/SVG/education.svg" loading="lazy" width="109" height="106" alt="Education and training icon" class="image-5">
-            <div class="card-header-wrapper">
-              <div class="service-card-title">Education, Training &amp; Thought Leadership</div>
-            </div>
-          </div>
-          <div class="card-header-wrapper">
-            <div class="subtitle black">For teams, communities, and leadership groups</div>
-            <div class="body-regular left black">Building shared understanding of decentralised systems — without hype or dogma.</div>
-          </div>
-          <div class="card-list-wrapper">
-            <div class="subtitle black">What this covers</div>
-            <ul role="list" class="list w-list-unstyled">
-              <li class="list-item"><div class="list-text">Executive &amp; board-level briefings</div></li>
-              <li class="list-item"><div class="list-text">Technical workshops</div></li>
-              <li class="list-item"><div class="list-text">Internal enablement programmes</div></li>
-              <li class="list-item"><div class="list-text">Public speaking, writing, and community education</div></li>
-            </ul>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -215,11 +145,11 @@
     <div class="container approach">
       <div data-aos="fade-up" class="header-wrapper">
         <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-          <div class="green-eyebrow">case studies</div>
+          <div class="green-eyebrow">{{ home.caseStudies.eyebrow }}</div>
         </div>
-        <h2 class="h2-style">Proven Impact</h2>
+        <h2 class="h2-style">{{ home.caseStudies.heading }}</h2>
         <div class="w-layout-vflex lead-text">
-          <p class="body-regular left">From supply chain transparency to NFT ecosystems, see how we've helped businesses since 2018 move from strategy to successful deployment.</p>
+          <p class="body-regular left">{{ home.caseStudies.lead }}</p>
         </div>
       </div>
       <div class="case-studies-grid">
@@ -249,40 +179,32 @@
     <div class="container services">
       <div data-aos="fade-up" class="header-wrapper">
         <div class="module-eyebrow"><img src="/images/black-icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-          <div class="black-eyebrow">our team</div>
+          <div class="black-eyebrow">{{ home.team.eyebrow }}</div>
         </div>
-        <h2 class="h2-style black">Your Partners in Transformation</h2>
+        <h2 class="h2-style black">{{ home.team.heading }}</h2>
         <div class="w-layout-vflex lead-text">
-          <p class="body-regular left black">Web3 is complex; working with us isn't. Our Manchester-based engineers make blockchain actionable, delivering the tech and expertise to lead.</p>
+          <p class="body-regular left black">{{ home.team.lead }}</p>
         </div>
       </div>
       <div class="team-flex">
-        <div data-aos="fade-up" class="team-col"><img src="/images/andy.jpg" loading="lazy" alt="Man wearing glasses and a t-shirt with a graphic of a skull, arrow, and dripping shapes." class="team-image">
+        {% for member in home.team.members %}
+        <div data-aos="fade-up" class="team-col"><img src="/images/{{ member.image }}" loading="lazy" alt="{{ member.imageAlt }}" class="team-image">
           <div class="details-wrapper">
             <div class="details-style">
-              <div class="name">Andy Gray</div>
-              <div class="job-role">CO-FOUNDER</div>
-              <div class="body-regular black left">Co-creator of KnownOrigin and Blockchain Manchester. Andy brings a decade of hands-on Web3 product and engineering experience, from Ethereum's earliest days through to eBay acquisition and beyond.</div>
+              <div class="name">{{ member.name }}</div>
+              <div class="job-role">{{ member.role }}</div>
+              <div class="body-regular black left">{{ member.bio }}</div>
             </div>
-            <a href="https://uk.linkedin.com/in/andrewmgray" class="linkedin-btn w-inline-block"><img src="/images/linkedin-icon.svg" loading="lazy" width="23.998355865478516" height="24" alt="LinkedIn Icon" class="linkedin-icon"></a>
+            <a href="{{ member.linkedin }}" class="linkedin-btn w-inline-block"><img src="/images/linkedin-icon.svg" loading="lazy" width="23.998355865478516" height="24" alt="LinkedIn Icon" class="linkedin-icon"></a>
           </div>
         </div>
-        <div data-aos="fade-up" class="team-col"><img src="/images/james.jpg" loading="lazy" alt="Smiling man with short dark hair and glasses wearing a dark collared shirt against a plain light background." class="team-image">
-          <div class="details-wrapper">
-            <div class="details-style">
-              <div class="name">James Morgan</div>
-              <div class="job-role">CO-FOUNDER</div>
-              <div class="body-regular black left">Co-author of EIP-2981, the Ethereum NFT Royalty Standard. James is a senior full-stack engineer with deep smart contract expertise, co-founder of KnownOrigin, and a long-standing contributor to the Ethereum ecosystem.</div>
-            </div>
-            <a href="https://uk.linkedin.com/in/jamesemorgan" class="linkedin-btn w-inline-block"><img src="/images/linkedin-icon.svg" loading="lazy" width="23.998355865478516" height="24" alt="LinkedIn Icon" class="linkedin-icon"></a>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="container services">
       <div data-aos="fade-up" class="header-wrapper">
         <div class="module-eyebrow"><img src="/images/black-icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-          <div class="black-eyebrow">Deeply embedded in the Web3 ecosystem...</div>
+          <div class="black-eyebrow">{{ home.team.communityEyebrow }}</div>
         </div>
       </div>
       <div data-aos="fade-up" class="community-wrapper">
@@ -304,11 +226,11 @@
       <div data-aos="fade-up" class="header-and-button">
         <div class="header-wrapper">
           <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-            <div class="green-eyebrow">latest insights</div>
+            <div class="green-eyebrow">{{ home.blog.eyebrow }}</div>
           </div>
-          <h2 class="h2-style">The Intelligence Hub</h2>
+          <h2 class="h2-style">{{ home.blog.heading }}</h2>
           <div class="w-layout-vflex lead-text">
-            <p class="body-regular left">Education is at our core. Explore our latest guides and technical deep-dives to help your business stay ahead on-chain.</p>
+            <p class="body-regular left">{{ home.blog.lead }}</p>
           </div>
         </div>
         <a href="/blog/index.html" class="secondary-button blogs w-button">View More Blogs</a>
@@ -347,16 +269,16 @@
       <div data-aos="fade-up" class="w-layout-vflex contact-col">
         <div class="header-wrapper contact">
           <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-            <div class="green-eyebrow">contact us</div>
+            <div class="green-eyebrow">{{ home.contact.eyebrow }}</div>
           </div>
-          <h2 class="h2-style">Let's turn your blockchain vision into a production-ready reality.</h2>
+          <h2 class="h2-style">{{ home.contact.heading }}</h2>
           <div class="w-layout-vflex lead-text">
-            <p class="body-regular left">Whether you have a fully scoped project or just a 'what if' idea, our team is ready to help you navigate the next steps. Fill in the form to get in touch, or reach out via one of the direct methods below—we'll aim to get back to you as soon as possible.</p>
+            <p class="body-regular left">{{ home.contact.lead }}</p>
           </div>
         </div>
         <div class="contact-flex">
           <div class="contact-row"><img src="/images/email.svg" loading="lazy" width="24" height="24" alt="" class="email">
-            <a href="mailto:human@blockrocket.tech" class="contact-large">human@blockrocket.tech</a>
+            <a href="mailto:{{ home.contact.email }}" class="contact-large">{{ home.contact.email }}</a>
           </div>
         </div>
       </div>
@@ -396,7 +318,7 @@
     "description": "Expert-led Web3 consultancy based in Manchester. Blockchain strategy, smart contract engineering, and decentralised systems since 2018.",
     "foundingDate": "2018",
     "foundingLocation": "Manchester, UK",
-    "email": "human@blockrocket.tech",
+    "email": "{{ home.contact.email }}",
     "sameAs": [
       "https://www.linkedin.com/company/blockrockettech/",
       "https://twitter.com/blockrockettech",

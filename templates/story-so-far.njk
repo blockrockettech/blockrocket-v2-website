@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% set pageTitle = "The Story So Far | BlockRocket" %}
+  {% set pageDescription = "From a Manchester meetup to an Ethereum royalty standard to an eBay acquisition — how BlockRocket got here, and where it's going next." %}
+  {% set extraStylesheet = "/css/story.css" %}
+  {% include "_partials/head.njk" %}
+</head>
+<body class="body" data-screen-label="Story So Far">
+  {% set isHome = false %}
+  {% include "_partials/nav.njk" %}
+
+  <!-- ============== HERO ============== -->
+  <div class="section_hero story-hero">
+    <div class="container">
+      <div data-aos="fade-up" class="main-content">
+        <div class="w-layout-vflex top-content-wrapper">
+          <div class="eyebrow">{{ story.hero.eyebrow }}</div>
+          <h1 class="heading-1">{{ story.hero.heading }}</h1>
+          <div class="lead-text">
+            <div class="lead-text centre">{{ story.hero.lead | spanBold | safe }}</div>
+          </div>
+        </div>
+        <div class="story-hero-meta">
+          {% for item in story.hero.meta %}
+          <span>{{ item }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <img src="/images/blocks_1blocks.avif" loading="lazy" data-aos="fade-up" alt="" class="left-block">
+    <img src="/images/blocks_1blocks.avif" loading="lazy" data-aos="fade-up" alt="" class="right-block">
+    <div class="hero-blur"></div>
+  </div>
+
+  <!-- ============== CHAPTER 1 ============== -->
+  <div class="section_chapter" data-screen-label="Chapter 1 — Community Roots">
+    <div class="container">
+      <div class="chapter-grid">
+        <div data-aos="fade-up" class="left-col-wrapper">
+          <div class="module-eyebrow">
+            <img src="/images/icon.svg" loading="lazy" width="10" height="12" alt="" class="icon">
+            <div class="green-eyebrow">{{ story.chapter1.eyebrow }}</div>
+          </div>
+          <div class="h2-style">{{ story.chapter1.heading }}</div>
+          <div class="w-layout-vflex lead-text">
+            {% for para in story.chapter1.paragraphs %}
+            <p class="body-regular left black">{{ para | bodyBold | safe }}</p>
+            {% endfor %}
+          </div>
+        </div>
+        <div data-aos="fade-up" class="chapter-image-wrap">
+          <span class="chapter-year-badge">{{ story.chapter1.yearBadge }}</span>
+          <img src="/images/manchester_1manchester.avif" alt="{{ story.chapter1.imageAlt }}" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <img src="/images/half-blocks-left.png" loading="lazy" alt="" class="left-half-block">
+  </div>
+
+  <!-- ============== TIMELINE ============== -->
+  <div class="section_timeline" data-screen-label="Timeline">
+    <div data-aos="fade-up" class="timeline-header">
+      <div class="module-eyebrow">
+        <img src="/images/icon.svg" loading="lazy" width="10" height="12" alt="" class="icon">
+        <div class="green-eyebrow">{{ story.timeline.eyebrow }}</div>
+      </div>
+      <h2 class="h2-style">{{ story.timeline.heading }}</h2>
+      <div class="w-layout-vflex lead-text">
+        <p class="body-regular left" style="text-align:center;">{{ story.timeline.lead }}</p>
+      </div>
+    </div>
+
+    <div class="timeline">
+      {% for entry in story.timeline.entries %}
+      <div data-aos="fade-up" class="timeline-row {{ entry.side }}">
+        {% if entry.side == 'left' %}
+          <div class="timeline-card">
+            <div class="timeline-card-eyebrow">{{ entry.category }}</div>
+            <h3 class="timeline-card-title">{{ entry.title }}</h3>
+            <p class="timeline-card-body">{{ entry.body | mdInline | safe }}</p>
+          </div>
+          <div class="timeline-node">
+            <span class="timeline-dot"></span>
+            <span class="timeline-year">{{ entry.year }}</span>
+          </div>
+          <div></div>
+        {% else %}
+          <div></div>
+          <div class="timeline-node">
+            <span class="timeline-dot"></span>
+            <span class="timeline-year">{{ entry.year }}</span>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card-eyebrow">{{ entry.category }}</div>
+            <h3 class="timeline-card-title">{{ entry.title }}</h3>
+            <p class="timeline-card-body">{{ entry.body | mdInline | safe }}</p>
+          </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- ============== PULL QUOTE ============== -->
+  <div class="section_pullquote" data-screen-label="Pull quote — EIP-2981">
+    <div data-aos="fade-up" class="pullquote">
+      <div class="pullquote-mark">"</div>
+      <p class="pullquote-body">{{ story.pullquote.body | mdInline | safe }}</p>
+      <div class="pullquote-attribution">{{ story.pullquote.attribution }}</div>
+    </div>
+  </div>
+
+  <!-- ============== CHAPTER 2 ============== -->
+  <div class="section_chapter" data-screen-label="Chapter 2 — KnownOrigin">
+    <div class="container">
+      <div class="chapter-grid reverse">
+        <div data-aos="fade-up" class="left-col-wrapper">
+          <div class="module-eyebrow">
+            <img src="/images/icon.svg" loading="lazy" width="10" height="12" alt="" class="icon">
+            <div class="green-eyebrow">{{ story.chapter2.eyebrow }}</div>
+          </div>
+          <div class="h2-style">{{ story.chapter2.heading }}</div>
+          <div class="w-layout-vflex lead-text">
+            {% for para in story.chapter2.paragraphs %}
+            <p class="body-regular left black">{{ para | bodyBold | safe }}</p>
+            {% endfor %}
+          </div>
+        </div>
+        <div data-aos="fade-up" class="chapter-image-wrap">
+          <span class="chapter-year-badge">{{ story.chapter2.yearBadge }}</span>
+          <img src="/images/nft-img_1nft-img.avif" alt="{{ story.chapter2.imageAlt }}" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== STATS ============== -->
+  <div class="section_stats" data-screen-label="Stats">
+    <div data-aos="fade-up" class="stats-header">
+      <div class="module-eyebrow">
+        <img src="/images/black-icon.svg" loading="lazy" width="10" height="12" alt="" class="icon">
+        <div class="black-eyebrow">{{ story.stats.eyebrow }}</div>
+      </div>
+      <h2 class="h2-style black">{{ story.stats.heading }}</h2>
+    </div>
+
+    <div class="stat-grid">
+      {% for stat in story.stats.items %}
+      <div data-aos="fade-up" class="stat-cell">
+        <div class="stat-value{% if stat.small %} stat-value--sm{% endif %}">
+          {{ stat.value }}{% if stat.valueSup %}<sup>{{ stat.valueSup }}</sup>{% endif %}
+        </div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- ============== TODAY / CTA ============== -->
+  <div class="section_today-cta" data-screen-label="Today CTA">
+    <div data-aos="fade-up" class="today-cta-inner">
+      <div class="module-eyebrow" style="justify-content:center;">
+        <img src="/images/icon.svg" loading="lazy" width="10" height="12" alt="" class="icon">
+        <div class="green-eyebrow">{{ story.cta.eyebrow }}</div>
+      </div>
+      <h2 class="h2-style">{{ story.cta.heading }}</h2>
+      <div class="w-layout-vflex lead-text">
+        <p class="body-regular left" style="text-align:center;">{{ story.cta.lead }}</p>
+      </div>
+      <div class="today-cta-buttons">
+        {% for btn in story.cta.buttons %}
+        <a href="{{ btn.href }}" class="{{ btn.style }}-button w-button">{{ btn.label }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <img src="/images/half-blocks-left.png" loading="lazy" alt="" class="left-half-block">
+    <img src="/images/half-blocks-right.png" loading="lazy" alt="" class="right-half-block">
+  </div>
+
+  {% include "_partials/footer.njk" %}
+  {% include "_partials/scripts.njk" %}
+</body>
+</html>

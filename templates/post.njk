@@ -5,11 +5,11 @@
   {% set pageDescription = post.excerpt %}
   {% include "_partials/head.njk" %}
 </head>
-<body class="body">
+<body class="body" data-screen-label="Blog Post">
   {% set isHome = false %}
   {% include "_partials/nav.njk" %}
 
-  <div id="hero" class="section_header">
+  <div class="section_header">
     <div data-aos="fade-up" class="container blog-child-header">
       <div class="breadcrumb-wrapper">
         <a href="/" class="breadcrumb-link">Home</a><img src="/images/chevron_1.svg" loading="lazy" width="16" height="16" alt="" class="icon_chevron">
@@ -52,7 +52,7 @@
   </div>
   {% endif %}
 
-  <div id="services" data-aos="fade-up" class="section-blog-content">
+  <div data-aos="fade-up" class="section_blog_content">
     <div class="blog-content-grid">
       <div data-aos="fade-up" class="blog-rich-text w-richtext">
         {{ post.content | safe }}
@@ -85,7 +85,7 @@
   </div>
 
   {% if relatedPosts | length %}
-  <div class="section-read-more">
+  <div class="section_read_more">
     <div class="read-more-wrapper">
       <div class="module-eyebrow"><img src="/images/black-icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
         <div class="black-eyebrow">READ MORE</div>
