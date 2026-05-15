@@ -45,9 +45,14 @@
   </div>
 
   {% if post.coverImage %}
+  {% set _overlayPrefix = 'linear-gradient(#05da774d, #05da774d), ' if post.coverImageOverlay else '' %}
+  {% set _bgImg = _overlayPrefix + "url('/images/" + post.coverImage + "')" %}
+  {% set _fit = post.coverImageFit or 'cover' %}
+  {% set _bgSize = ('auto, ' + _fit) if post.coverImageOverlay else _fit %}
+  {% set _bgRepeat = 'no-repeat, no-repeat' if post.coverImageOverlay else 'no-repeat' %}
   <div class="section_featured-image">
     <div data-aos="fade-up" class="featured-img-wrapper">
-      <div data-aos="fade-up" class="featured-image" style="background-image: url('/images/{{ post.coverImage }}')"></div>
+      <div data-aos="fade-up" class="featured-image" style="background-image: {{ _bgImg }}; background-position: {{ post.coverImagePosition or 'center' }}; background-size: {{ _bgSize }}; background-repeat: {{ _bgRepeat }}{% if post.coverImageBg %}; background-color: {{ post.coverImageBg }}{% endif %}"></div>
     </div>
   </div>
   {% endif %}

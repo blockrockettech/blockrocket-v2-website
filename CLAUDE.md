@@ -68,7 +68,11 @@ readTime: "N min read"  # displayed in post header
 tags:
   - label: string       # tag display name (used for filter buttons)
     highlight: true     # optional — renders tag with emphasis styling
-coverImage: string      # optional — filename in public/images/ (e.g. my-post.avif)
+coverImage: string          # optional — filename in public/images/ (e.g. my-post.avif)
+coverImagePosition: string  # optional — CSS background-position (e.g. top, bottom, center). Default: center
+coverImageFit: string       # optional — CSS background-size (e.g. cover, contain, auto). Default: cover
+coverImageBg: string        # optional — CSS background-color shown behind the image (e.g. "#000", "#1a1a2e"). Useful with contain or auto fit.
+coverImageOverlay: boolean  # optional — adds green brand tint overlay over the cover image
 ```
 
 **Important:** `date` is parsed by gray-matter as a JavaScript Date object when formatted as `YYYY-MM-DD`. The build script handles both Date objects and strings with `formatDate` filter.
