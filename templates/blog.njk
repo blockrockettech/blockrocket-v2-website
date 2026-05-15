@@ -5,11 +5,11 @@
   {% set pageDescription = "High-performance blockchain solutions for enterprise and startups. From smart contract auditing to full-stack Web3 engineering, we build production-ready systems." %}
   {% include "_partials/head.njk" %}
 </head>
-<body class="body">
+<body class="body" data-screen-label="Blog Index">
   {% set isHome = false %}
   {% include "_partials/nav.njk" %}
 
-  <div id="hero" class="section_header">
+  <div class="section_header">
     <div data-aos="fade-up" class="container blog-header">
       <div data-aos="fade-up" class="header-wrapper">
         <div class="breadcrumb-wrapper">
@@ -60,7 +60,7 @@
   </div>
   {% endif %}
 
-  <div id="services" data-aos="fade-up" class="section_blog-grid">
+  <div data-aos="fade-up" class="section_blog_grid">
     <div class="container blog-parent">
       <div data-aos="fade-up" class="header-wrapper blog">
         <h2 class="h2-style black">Recent Blogs</h2>

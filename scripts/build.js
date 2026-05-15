@@ -10,12 +10,48 @@ const nunjucks = require('nunjucks');
 
 const ROOT = path.resolve(__dirname, '..');
 const CONTENT_DIR = path.join(ROOT, 'content', 'blog');
+const PAGES_DIR = path.join(ROOT, 'content', 'pages');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const DIST_DIR = path.join(ROOT, 'dist');
 
 // Configure Nunjucks
 const env = nunjucks.configure(TEMPLATES_DIR, { autoescape: true, throwOnUndefined: false });
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// **bold** → <span class="text-bold">; rest in <span class="text-regular"> (hero lead text)
+env.addFilter('spanBold', (str) => {
+  if (!str) return '';
+  return escHtml(str)
+    .split(/(\*\*[^*]+\*\*)/g)
+    .map(part => {
+      if (part.startsWith('**') && part.endsWith('**'))
+        return `<span class="text-bold">${part.slice(2, -2)}</span>`;
+      return part ? `<span class="text-regular">${part}</span>` : '';
+    })
+    .join('');
+});
+
+// **bold** → <span class="body-bold"> (body paragraphs; rest inherits body-regular from parent)
+env.addFilter('bodyBold', (str) => {
+  if (!str) return '';
+  return escHtml(str).replace(/\*\*([^*]+)\*\*/g, '<span class="body-bold">$1</span>');
+});
+
+// **bold** → <strong>, *italic* → <em> (timeline bodies, pull quote)
+env.addFilter('mdInline', (str) => {
+  if (!str) return '';
+  let s = escHtml(str);
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  return s;
+});
 
 // formatDate: "2024-05-30" → "May 30, 2024"
 env.addFilter('formatDate', (dateInput) => {
@@ -68,6 +104,11 @@ function addHeadingIds(html) {
   });
 }
 
+function loadPageContent(name) {
+  const file = fs.readFileSync(path.join(PAGES_DIR, `${name}.mdx`), 'utf8');
+  return matter(file).data;
+}
+
 function loadPosts() {
   if (!fs.existsSync(CONTENT_DIR)) return [];
 
@@ -104,9 +145,16 @@ function build() {
     console.log('[build] Copied public assets');
   }
 
+  // Load page content from content/pages/
+  const home = loadPageContent('home');
+  const story = loadPageContent('story-so-far');
+
   // Load posts
   const posts = loadPosts();
   const featuredPost = posts[0] || null;
+  // Posts shown on /blog/ grid: exclude the featured one so it isn't rendered twice
+  const blogGridPosts = posts.slice(1);
+  // Posts shown on homepage "Latest Insights" strip: top 3 by date (includes featured)
   const latestPosts = posts.slice(0, 3);
   const allTags = [...new Set(posts.flatMap(p => (p.tags || []).map(t => t.label)))];
 
@@ -138,7 +186,7 @@ function build() {
 
   // Render blog listing page
   const blogHtml = nunjucks.render('blog.njk', {
-    posts,
+    posts: blogGridPosts,
     featuredPost,
     allTags,
     site: siteConfig,
@@ -149,6 +197,7 @@ function build() {
 
   // Render landing page
   const indexHtml = nunjucks.render('index.njk', {
+    home,
     latestPosts,
     site: siteConfig,
     pageUrl: '/',
@@ -156,7 +205,16 @@ function build() {
   fs.writeFileSync(path.join(DIST_DIR, 'index.html'), indexHtml);
   console.log('[build]   /index.html');
 
-  console.log(`[build] Done — ${posts.length} post(s), ${posts.length + 2} page(s) generated`);
+  // Render /story-so-far page
+  const storyHtml = nunjucks.render('story-so-far.njk', {
+    story,
+    site: siteConfig,
+    pageUrl: '/story-so-far.html',
+  });
+  fs.writeFileSync(path.join(DIST_DIR, 'story-so-far.html'), storyHtml);
+  console.log('[build]   /story-so-far.html');
+
+  console.log(`[build] Done — ${posts.length} post(s), ${posts.length + 3} page(s) generated`);
 }
 
 build();

@@ -1,0 +1,126 @@
+/*
+ * overrides.css
+ *
+ * Aliases new (consistent _ separator) class names introduced in PR1
+ * to the existing rules in blockrocket.css.
+ *
+ * blockrocket.css is treated as vendor / read-only (see CLAUDE.md), so
+ * rather than editing it, we duplicate the relevant rules here under the
+ * new selector names. Once the vendor stylesheet is unfrozen and the old
+ * selectors are renamed in place, this file can be deleted.
+ *
+ * Mirrored from public/css/blockrocket.css:
+ *   .section_blog-grid       → .section_blog_grid
+ *   .section-blog-content    → .section_blog_content
+ *   .section-read-more       → .section_read_more
+ *
+ * Breakpoints mirrored: base, 991px, 767px, 479px.
+ */
+
+/* ---------- base (≥992px) ---------- */
+
+.section_blog_grid {
+  grid-column-gap: 120px;
+  grid-row-gap: 120px;
+  background-color: var(--base--white);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  padding: 48px 200px 120px;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+}
+
+.section_blog_content {
+  grid-column-gap: 112px;
+  grid-row-gap: 112px;
+  background-color: var(--base--white);
+  flex-direction: column;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr .25fr;
+  grid-auto-columns: 1fr;
+  place-content: start center;
+  place-items: center stretch;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  padding: 56px 200px 80px;
+  text-decoration: none;
+  display: flex;
+  position: static;
+  overflow: hidden;
+}
+
+.section_read_more {
+  grid-column-gap: 120px;
+  grid-row-gap: 120px;
+  background-color: var(--base--white);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  padding: 48px 200px 120px;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+}
+
+/* ---------- ≤991px ---------- */
+
+@media screen and (max-width: 991px) {
+  .section_blog_grid {
+    padding: 48px 80px 80px;
+  }
+
+  .section_blog_content {
+    padding: 80px;
+  }
+
+  .section_read_more {
+    padding: 48px 80px 80px;
+  }
+}
+
+/* ---------- ≤767px ---------- */
+
+@media screen and (max-width: 767px) {
+  .section_blog_grid {
+    grid-column-gap: 80px;
+    grid-row-gap: 80px;
+    padding: 40px 40px 80px;
+  }
+
+  .section_blog_content {
+    grid-column-gap: 80px;
+    grid-row-gap: 80px;
+    flex-flow: wrap;
+    padding: 40px 40px 80px;
+  }
+
+  .section_read_more {
+    grid-column-gap: 80px;
+    grid-row-gap: 80px;
+    padding: 40px 40px 80px;
+  }
+}
+
+/* ---------- ≤479px ---------- */
+
+@media screen and (max-width: 479px) {
+  .section_blog_grid {
+    max-width: 100%;
+    padding: 40px 24px 48px;
+  }
+
+  .section_blog_content,
+  .section_read_more {
+    max-width: 100%;
+    padding: 40px 24px 48px;
+  }
+}
