@@ -3,6 +3,7 @@ title: "EthSync: Real-Time Monitoring for Ethereum's Sync Committee"
 excerpt: "We built ethsync.wtf to make Ethereum's Sync Committee visible — a live dashboard tracking validator participation, BLS signature aggregation, and light client health in real time."
 date: '2026-04-28'
 thumbLabel: Open Source Tool
+coverImage: /blog/eth-sync-3.png
 readTime: 6 min read
 tags:
   - label: Ethereum
@@ -47,6 +48,8 @@ The dashboard updates every **12 seconds** (one Ethereum slot) and surfaces:
 
 Everything is read-only and runs directly against the Ethereum consensus layer. There's no middleware database, no proprietary indexing, no API keys required — just a live feed from the protocol itself.
 
+![RANDAO committee selection demo](/images/blog/eth-sync-1.png)
+
 ## The light client angle
 
 The Sync Committee exists *because* of light clients. Post-Merge Ethereum separates the data availability problem (full nodes) from the trust verification problem (light clients). The Sync Committee bridges the gap: a rotating group of validators whose BLS signatures are cheap to verify but expensive to forge.
@@ -80,3 +83,5 @@ BLS signature aggregation is handled entirely on-chain by the validators themsel
 If you're building light client integrations, validator tooling, or anything that depends on the Ethereum consensus layer behaving correctly, keep a tab open. It's a good signal.
 
 For questions or feedback, reach out via [blockrocket.tech](https://blockrocket.tech/).
+
+![Sync committee visualization](/images/blog/eth-sync-2.png)
