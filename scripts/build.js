@@ -129,6 +129,7 @@ function loadPosts() {
         url: `/blog/${slug}.html`,
       };
     })
+    .filter(post => !post.draft)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 

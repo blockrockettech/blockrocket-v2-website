@@ -60,6 +60,7 @@ dist/                ← generated output (gitignored)
 ## Frontmatter schema (content/blog/*.md)
 
 ```yaml
+draft: true             # optional — excludes the post from all listings and skips HTML generation
 title: string           # required — used in <title>, OG, card
 excerpt: string         # required — used in meta description, card body, post lead
 date: "YYYY-MM-DD"      # required — ISO string; used for sorting and display
