@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06060e"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </linearGradient>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#ffffff" fill-opacity="0.05"/>
+    </pattern>
+    <filter id="gblur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="60"/>
+    </filter>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#05da77" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#05da77" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#05da77" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#dots)"/>
+
+  <!-- Ambient green glow -->
+  <ellipse cx="900" cy="440" rx="420" ry="260" fill="#05da77" fill-opacity="0.08" filter="url(#gblur)"/>
+
+  <!-- Left green accent bar -->
+  <rect x="80" y="72" width="48" height="3" fill="#05da77"/>
+
+  <!-- Eyebrow -->
+  <text x="142" y="88" font-family="'Courier New', monospace" font-size="12" fill="#05da77" letter-spacing="4" text-anchor="start">BLOCKROCKET</text>
+
+  <!-- Main headline -->
+  <text x="80" y="192" font-family="Arial Black, Arial, sans-serif" font-size="68" font-weight="900" fill="#ffffff">From Proof of Concept</text>
+  <text x="80" y="272" font-family="Arial Black, Arial, sans-serif" font-size="68" font-weight="900" fill="#ffffff">to <tspan fill="#05da77">Production</tspan></text>
+
+  <!-- Sub-headline -->
+  <text x="80" y="326" font-family="Arial, sans-serif" font-size="21" fill="#777777" letter-spacing="0.5">Full-Stack Web3 Delivery</text>
+
+  <!-- Divider -->
+  <line x1="80" y1="370" x2="560" y2="370" stroke="url(#lineGrad)" stroke-width="1"/>
+
+  <!-- Pipeline stages -->
+
+  <!-- Stage 1: CONCEPT -->
+  <rect x="80" y="405" width="205" height="88" rx="3" fill="#0d1a12" stroke="#1e3d28" stroke-width="1.5"/>
+  <text x="103" y="434" font-family="'Courier New', monospace" font-size="10" fill="#05da77" letter-spacing="3">01</text>
+  <text x="103" y="462" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" font-weight="700">CONCEPT</text>
+  <text x="103" y="481" font-family="Arial, sans-serif" font-size="11" fill="#555555">Strategy &amp; scoping</text>
+
+  <!-- Arrow 1 -->
+  <line x1="290" y1="449" x2="328" y2="449" stroke="#2a5a3a" stroke-width="1.5"/>
+  <polygon points="325,444 337,449 325,454" fill="#2a5a3a"/>
+
+  <!-- Stage 2: SMART CONTRACTS -->
+  <rect x="340" y="405" width="205" height="88" rx="3" fill="#0d1a12" stroke="#1e3d28" stroke-width="1.5"/>
+  <text x="363" y="434" font-family="'Courier New', monospace" font-size="10" fill="#05da77" letter-spacing="3">02</text>
+  <text x="363" y="462" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" font-weight="700">CONTRACTS</text>
+  <text x="363" y="481" font-family="Arial, sans-serif" font-size="11" fill="#555555">Design, test, audit</text>
+
+  <!-- Arrow 2 -->
+  <line x1="550" y1="449" x2="588" y2="449" stroke="#2a5a3a" stroke-width="1.5"/>
+  <polygon points="585,444 597,449 585,454" fill="#2a5a3a"/>
+
+  <!-- Stage 3: ENGINEERING -->
+  <rect x="600" y="405" width="205" height="88" rx="3" fill="#0d1a12" stroke="#1e3d28" stroke-width="1.5"/>
+  <text x="623" y="434" font-family="'Courier New', monospace" font-size="10" fill="#05da77" letter-spacing="3">03</text>
+  <text x="623" y="462" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" font-weight="700">ENGINEERING</text>
+  <text x="623" y="481" font-family="Arial, sans-serif" font-size="11" fill="#555555">Full-stack build</text>
+
+  <!-- Arrow 3 -->
+  <line x1="810" y1="449" x2="848" y2="449" stroke="#05da77" stroke-width="1.5"/>
+  <polygon points="845,444 857,449 845,454" fill="#05da77"/>
+
+  <!-- Stage 4: PRODUCTION (highlighted) -->
+  <rect x="860" y="400" width="205" height="98" rx="3" fill="#05da77" fill-opacity="0.1" stroke="#05da77" stroke-width="1.5"/>
+  <text x="883" y="432" font-family="'Courier New', monospace" font-size="10" fill="#05da77" letter-spacing="3">04</text>
+  <text x="883" y="460" font-family="Arial, sans-serif" font-size="16" fill="#05da77" font-weight="700">PRODUCTION</text>
+  <text x="883" y="479" font-family="Arial, sans-serif" font-size="11" fill="#05da77" fill-opacity="0.7">Shipped &amp; observable</text>
+
+  <!-- Bottom rule + URL -->
+  <line x1="80" y1="560" x2="1120" y2="560" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="80" y="586" font-family="'Courier New', monospace" font-size="12" fill="#333333" letter-spacing="1">blockrocket.tech</text>
+</svg>
