@@ -100,43 +100,6 @@
   </div>
   #}
 
-  <div id="services" data-aos="fade-up" class="section_services">
-    <div class="container services">
-      <div data-aos="fade-up" class="header-wrapper">
-        <div class="module-eyebrow"><img src="/images/black-icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-          <div class="black-eyebrow">{{ home.services.eyebrow }}</div>
-        </div>
-        <h2 class="h2-style black">{{ home.services.heading }}</h2>
-        <div class="w-layout-vflex lead-text">
-          <p class="body-regular left black">{{ home.services.lead }}</p>
-        </div>
-      </div>
-      <div class="card-grid">
-        {% for svc in home.services.items %}
-        <div data-aos="fade-up" class="card">
-          <div class="img-and-header"><img src="/images/{{ svc.icon }}" loading="lazy" width="109" height="106" alt="{{ svc.iconAlt }}" class="image-5">
-            <div class="card-header-wrapper">
-              <div class="service-card-title">{{ svc.title }}</div>
-            </div>
-          </div>
-          <div class="card-header-wrapper">
-            <div class="subtitle black">{{ svc.subtitle }}</div>
-            <div class="body-regular left black">{{ svc.body }}</div>
-          </div>
-          <div class="card-list-wrapper">
-            <div class="subtitle black">{{ svc.listHeading }}</div>
-            <ul role="list" class="list w-list-unstyled">
-              {% for item in svc.listItems %}
-              <li class="list-item"><div class="list-text">{{ item }}</div></li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-
   <div id="case-studies" class="section_case-studies">
     <div class="container approach">
       <div data-aos="fade-up" class="header-wrapper">
@@ -249,6 +212,43 @@
     </div>
     <img src="/images/half-blocks-right.png" loading="lazy" data-aos="fade-up" alt="" class="right-half-block blog">
     <img src="/images/half-blocks-left.png" loading="lazy" data-aos="fade-up" alt="" class="left-half-block blog">
+  </div>
+
+  <div id="services" data-aos="fade-up" class="section_services">
+    <div class="container services">
+      <div data-aos="fade-up" class="header-wrapper">
+        <div class="module-eyebrow"><img src="/images/black-icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
+          <div class="black-eyebrow">{{ home.services.eyebrow }}</div>
+        </div>
+        <h2 class="h2-style black">{{ home.services.heading }}</h2>
+        <div class="w-layout-vflex lead-text">
+          <p class="body-regular left black">{{ home.services.lead }}</p>
+        </div>
+      </div>
+      <div class="card-grid">
+        {% for svc in home.services.items %}
+        <div data-aos="fade-up" class="card">
+          <div class="img-and-header"><img src="/images/{{ svc.icon }}" loading="lazy" width="109" height="106" alt="{{ svc.iconAlt }}" class="image-5">
+            <div class="card-header-wrapper">
+              <div class="service-card-title">{{ svc.title }}</div>
+            </div>
+          </div>
+          <div class="card-header-wrapper">
+            <div class="subtitle black">{{ svc.subtitle }}</div>
+            <div class="body-regular left black">{{ svc.body }}</div>
+          </div>
+          <div class="card-list-wrapper">
+            <div class="subtitle black">{{ svc.listHeading }}</div>
+            <ul role="list" class="list w-list-unstyled">
+              {% for item in svc.listItems %}
+              <li class="list-item"><div class="list-text">{{ item }}</div></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 
   <div id="contact" class="section_contact">
