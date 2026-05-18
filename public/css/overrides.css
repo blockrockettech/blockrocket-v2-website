@@ -140,3 +140,12 @@
 .error-message[data-fs-error] {
   width: 100%;
 }
+
+.success-message[data-fs-success] {
+  color: var(--base--white);
+  background-color: var(--base--green--black--white--5);
+  border: 1px solid var(--base--green--30);
+  border-radius: 4px;
+  margin-top: 20px;
+  padding: 20px 24px;
+}
