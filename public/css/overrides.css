@@ -124,3 +124,19 @@
     padding: 40px 24px 48px;
   }
 }
+
+.form-field-message {
+  color: #f44;
+  display: block;
+  min-height: 1.25rem;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  font-family: Zalando Sans, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.success-message[data-fs-success],
+.error-message[data-fs-error] {
+  width: 100%;
+}

@@ -271,19 +271,23 @@
       </div>
       <div data-aos="fade-up" class="form-wrapper">
         <div class="form-block w-form">
-          <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form">
-            <label for="name" class="input-label">Name</label>
-            <input class="field-row-wrapper w-input" maxlength="256" name="name" data-name="Name" placeholder="Your Name" type="text" id="name">
-            <label for="email" class="input-label">Email</label>
-            <input class="field-row-wrapper w-input" maxlength="256" name="email" data-name="Email" placeholder="Your Email" type="email" id="email" required="">
-            <label for="Message" class="input-label">Message</label>
-            <textarea required="" placeholder="Your Message" maxlength="5000" id="Message" name="Message" data-name="Message" class="field-row-wrapper w-input"></textarea>
-            <input type="submit" data-wait="Please wait..." class="primary-button wide w-button" value="Submit">
+          <form id="contact-form" name="contact-form" data-name="Contact Form" action="https://formspree.io/f/mbdbjzqz" method="POST" accept-charset="UTF-8" class="form">
+            <input type="hidden" name="_subject" value="New BlockRocket website enquiry">
+            <label for="contact-name" class="input-label">Name</label>
+            <input class="field-row-wrapper w-input" maxlength="256" name="name" data-name="Name" data-fs-field placeholder="Your Name" type="text" id="contact-name" required="">
+            <span class="form-field-message" data-fs-error="name" aria-live="polite"></span>
+            <label for="contact-email" class="input-label">Email</label>
+            <input class="field-row-wrapper w-input" maxlength="256" name="email" data-name="Email" data-fs-field placeholder="Your Email" type="email" id="contact-email" required="">
+            <span class="form-field-message" data-fs-error="email" aria-live="polite"></span>
+            <label for="contact-message" class="input-label">Message</label>
+            <textarea required="" placeholder="Your Message" maxlength="5000" id="contact-message" name="message" data-name="Message" data-fs-field class="field-row-wrapper w-input"></textarea>
+            <span class="form-field-message" data-fs-error="message" aria-live="polite"></span>
+            <button type="submit" data-wait="Please wait..." data-fs-submit-btn class="primary-button wide w-button">Submit</button>
           </form>
-          <div class="success-message w-form-done">
-            <div>Thank you! Your submission has been received!</div>
+          <div class="success-message w-form-done" data-fs-success tabindex="-1" aria-live="polite">
+            <div>Thanks. Your message has been sent and we&apos;ll get back to you shortly.</div>
           </div>
-          <div class="error-message w-form-fail">
+          <div class="error-message w-form-fail" data-fs-error tabindex="-1" aria-live="polite">
             <div>Oops! Something went wrong while submitting the form.</div>
           </div>
         </div>
@@ -294,6 +298,16 @@
 
   {% include "_partials/footer.njk" %}
   {% include "_partials/scripts.njk" %}
+  <script>
+  window.formspree = window.formspree || function () {
+    (formspree.q = formspree.q || []).push(arguments);
+  };
+  formspree('initForm', {
+    formElement: '#contact-form',
+    formId: 'mbdbjzqz'
+  });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
   <script type="application/ld+json">
   {
