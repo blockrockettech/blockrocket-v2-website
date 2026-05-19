@@ -1,6 +1,6 @@
 # BlockRocket v2 Website
 
-Marketing and blog site for [BlockRocket](https://blockrocket.tech) — expert-led Web3 consultancy based in Manchester, UK. Co-founded by Andy Gray and James Morgan (KnownOrigin → eBay acquisition, 2022).
+Marketing and blog site for [BlockRocket](https://blockrocket.tech) — a founder-led frontier technology consultancy based in Manchester, UK. Co-founded by Andy Gray and James Morgan (KnownOrigin → eBay acquisition, 2022).
 
 Built as a static site from a Webflow export. CSS/JS from the Webflow export is retained as-is; content, routing, and all CMS logic has been replaced with a Node.js build pipeline using gray-matter + Nunjucks.
 
@@ -28,26 +28,37 @@ Or for a one-off build:
 npm run build     # outputs to dist/
 ```
 
+## Current site shape
+
+- Homepage content is driven from `content/pages/home.mdx`
+- Company story page content is driven from `content/pages/story-so-far.mdx`
+- Blog posts live in `content/blog/`
+- Homepage contact form submits to Formspree using the CDN version of `@formspree/ajax`
+- Vendor Webflow assets stay in place; local CSS fixes belong in `public/css/overrides.css`
+
 ## Project structure
 
 ```
 blockrocket-v2-website/
 ├── content/
-│   └── blog/             ← blog posts as .md / .mdx files
+│   ├── blog/             ← blog posts as .md / .mdx files
+│   └── pages/            ← structured homepage / story page content
 ├── templates/
 │   ├── _partials/
 │   │   ├── head.njk      ← <head> with SEO meta tags
 │   │   ├── nav.njk       ← site navigation
 │   │   ├── footer.njk    ← site footer
 │   │   └── scripts.njk   ← JS includes + AOS init
-│   ├── index.njk         ← landing page
+│   ├── index.njk         ← landing page + Formspree contact form
 │   ├── blog.njk          ← blog listing (/blog/index.html)
-│   └── post.njk          ← individual blog post
+│   ├── post.njk          ← individual blog post
+│   └── story-so-far.njk  ← company story page
 ├── public/               ← static assets copied verbatim to dist/
 │   ├── css/
 │   │   ├── normalize.css
 │   │   ├── base.css      ← Webflow base styles
-│   │   └── blockrocket.css ← site-specific styles
+│   │   ├── blockrocket.css ← site-specific styles
+│   │   └── overrides.css ← safe non-vendor overrides
 │   ├── js/
 │   │   └── site.js       ← interaction runtime (from Webflow export)
 │   └── images/
@@ -55,8 +66,7 @@ blockrocket-v2-website/
 │   ├── build.js          ← main build pipeline
 │   └── watch.js          ← chokidar watcher for dev
 ├── dist/                 ← generated output (gitignored, Vercel deploys this)
-├── .env                  ← local env vars (gitignored)
-├── .env.example          ← env var reference
+├── .env                  ← local env vars (optional, gitignored)
 ├── bs-config.js          ← lite-server config
 └── vercel.json           ← build + rewrite config
 ```
@@ -95,16 +105,32 @@ All `##` headings in the body are automatically extracted and wired to the "Jump
 
 Filenames like `2024-06-01-my-post.md` are supported — the date prefix is stripped from the slug automatically.
 
+## Updating page copy
+
+- Homepage: `content/pages/home.mdx`
+- Story page: `content/pages/story-so-far.mdx`
+- Layout / section order: `templates/index.njk`
+- Footer copy: `templates/_partials/footer.njk`
+
+The homepage is frontmatter-driven, so most copy changes should go through `home.mdx` rather than the template.
+
+## Contact form
+
+The homepage contact form lives in `templates/index.njk` and posts to:
+
+`https://formspree.io/f/mbdbjzqz`
+
+It uses the CDN build of `@formspree/ajax` for vanilla JS submission state, while still keeping a normal HTML `action`/`POST` fallback. Success and field-error styling is handled in `public/css/overrides.css`.
+
 ## Environment variables
 
-Copy `.env.example` to `.env` and set:
+Create `.env` if you need local overrides:
 
 | Variable | Description | Example |
 |---|---|---|
 | `SITE_URL` | Canonical base URL (no trailing slash) | `https://blockrocket.tech` |
 | `SITE_NAME` | Site name used in meta | `BlockRocket` |
 | `GA_TRACKING_ID` | Google Analytics ID (optional) | `G-XXXXXXXXXX` |
-| `CONTACT_FORM_ENDPOINT` | Form POST endpoint (optional) | `https://...` |
 
 Set these same variables in your Vercel project settings for production builds.
 
@@ -133,9 +159,9 @@ npm run build
 
 ## Company context
 
-**BlockRocket** was founded in 2018 by **Andy Gray** and **James Morgan**, emerging from the Manchester blockchain community they helped build. The duo co-created **Blockchain Manchester** and launched **KnownOrigin** — a decentralised NFT art marketplace on Ethereum — which was acquired by **eBay in 2022**.
+**BlockRocket** was founded in 2018 by **Andy Gray** and **James Morgan**, emerging from the Manchester blockchain community they helped build. The duo co-created **Blockchain Manchester** and launched **KnownOrigin** — one of Ethereum's earliest digital art platforms — which was acquired by **eBay in 2022**.
 
-BlockRocket now operates as a veteran Web3 consultancy serving enterprises, startups, and founders navigating decentralised systems. Services include strategy & advisory, smart contract engineering, DeFi/self-custody onboarding, and education.
+BlockRocket now operates as a founder-led frontier technology consultancy serving enterprises, startups, and founders navigating decentralised systems, applied AI, and emerging infrastructure. Services include strategy, production-grade Web3 engineering, applied AI systems, and education.
 
 Notable clients include MetaFactory, CUDO Compute, TokenLandia, BrewDog, and KnownOrigin.
 

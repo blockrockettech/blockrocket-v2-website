@@ -9,45 +9,51 @@ Static marketing + blog site for BlockRocket (blockrocket.tech). Exported from W
 ## Stack
 
 - **Nunjucks** — HTML templating (`templates/`)
-- **gray-matter** — YAML frontmatter parsing from `.md` files
+- **gray-matter** — YAML frontmatter parsing from `.md` / `.mdx` files
 - **marked** — markdown → HTML conversion
 - **lite-server** — dev server (browser-sync wrapper)
 - **chokidar** — file watcher for dev mode
 - **Vercel** — deployment (static, `dist/` folder)
+- **Formspree AJAX** — homepage contact form submission via CDN-loaded vanilla JS
 
 ## Build pipeline (`scripts/build.js`)
 
 1. Cleans and recreates `dist/`
 2. Copies `public/` → `dist/` (all CSS, JS, images)
-3. Reads all `.md`/`.mdx` files from `content/blog/`
-4. Parses frontmatter with gray-matter, converts body with marked
-5. Extracts `##` headings for the sidebar "Jump To" links
-6. Adds `id` attributes to `<h2>` tags in rendered HTML
-7. Computes slug from filename (strips optional `YYYY-MM-DD-` prefix)
-8. Renders each post → `dist/blog/{slug}.html`
-9. Renders blog listing → `dist/blog/index.html`
-10. Renders landing page → `dist/index.html`
+3. Loads page data from `content/pages/home.mdx` and `content/pages/story-so-far.mdx`
+4. Reads all `.md`/`.mdx` files from `content/blog/`
+5. Parses frontmatter with gray-matter, converts post body with marked
+6. Extracts `##` headings for the sidebar "Jump To" links
+7. Adds `id` attributes to `<h2>` tags in rendered HTML
+8. Computes slug from filename (strips optional `YYYY-MM-DD-` prefix)
+9. Renders each post → `dist/blog/{slug}.html`
+10. Renders blog listing → `dist/blog/index.html`
+11. Renders landing page → `dist/index.html`
+12. Renders story page → `dist/story-so-far.html`
 
 Run it: `npm run build` or `npm run dev` (build + watch + live reload).
 
 ## Directory structure
 
 ```
+content/pages/       ← structured page content as frontmatter-only .mdx files
 content/blog/        ← .md/.mdx blog posts (frontmatter + markdown body)
 templates/
   _partials/
     head.njk         ← <head>: SEO meta, CSS links, fonts. NO Webflow scripts.
     nav.njk          ← navigation. Uses isHome variable to show/hide section links.
-    footer.njk       ← footer with real hrefs (no # placeholders)
+    footer.njk       ← footer links + brand line
     scripts.njk      ← JS includes (jQuery, site.js, AOS init + marquee setup)
-  index.njk          ← landing page (static content + dynamic blog preview)
+  index.njk          ← landing page (page-content driven + dynamic blog preview + Formspree contact form)
   blog.njk           ← blog listing (featured post + card grid + tag filter)
   post.njk           ← individual post (header, rich text, jump-to, related posts)
+  story-so-far.njk   ← timeline / company story page
 public/
   css/
     normalize.css    ← browser reset
     base.css         ← Webflow base styles (DO NOT EDIT — treat as vendor)
     blockrocket.css  ← site-specific styles (DO NOT EDIT — treat as vendor)
+    overrides.css    ← safe place for non-vendor CSS overrides
   js/
     site.js          ← Webflow interaction runtime (DO NOT EDIT — treat as vendor)
   images/            ← all site images
@@ -88,11 +94,15 @@ coverImageOverlay: boolean  # optional — adds green brand tint overlay over th
 
 ### `index.njk` also receives:
 - `latestPosts[]` — 3 most recent posts (full post objects)
+- `home` — parsed frontmatter object from `content/pages/home.mdx`
 
 ### `blog.njk` also receives:
 - `posts[]` — all posts sorted by date desc
 - `featuredPost` — `posts[0]`
 - `allTags[]` — unique tag labels across all posts (for filter buttons)
+
+### `story-so-far.njk` also receives:
+- `story` — parsed frontmatter object from `content/pages/story-so-far.mdx`
 
 ### `post.njk` also receives:
 - `post` — full post object including `post.content` (rendered HTML) and `post.headings[]`
@@ -129,8 +139,9 @@ These are defined in `blockrocket.css` and must not be changed:
 ## Adding a new page
 
 1. Create `templates/my-page.njk`
-2. Add a render call in `scripts/build.js` (follow the pattern for `index.njk`)
-3. Add a rewrite in `vercel.json` if you want a clean URL
+2. Create a matching `content/pages/my-page.mdx` file if the page content should be frontmatter-driven
+3. Add a render call in `scripts/build.js` (follow the pattern for `index.njk` / `story-so-far.njk`)
+4. Add a rewrite in `vercel.json` if you want a clean URL
 
 ## Adding/changing navigation links
 
@@ -163,6 +174,12 @@ Set `{% set isHome = true %}` only in `index.njk`.
 
 ### Rebuild after changes
 Changes to `templates/` or `content/` require a rebuild. With `npm run dev` running this is automatic. Otherwise: `npm run build`.
+
+### Update homepage copy or section content
+Edit `content/pages/home.mdx`. The homepage layout lives in `templates/index.njk`, but the section copy, service titles, contact copy, and team text come from the `home` frontmatter object.
+
+### Update the homepage contact form
+The contact form markup lives in `templates/index.njk`. It posts to Formspree endpoint `https://formspree.io/f/mbdbjzqz` using the CDN version of `@formspree/ajax`, with the init script embedded near the bottom of the page template. Inline success / error styling lives in `public/css/overrides.css`.
 
 ### Change the featured post
 The featured post on `/blog/index.html` is always `posts[0]` — the most recent by `date`. Update the `date` field in frontmatter to promote a post.
