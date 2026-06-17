@@ -162,6 +162,19 @@ Set `{% set isHome = true %}` only in `index.njk`.
 - [x] JSON-LD Organization schema on homepage
 - [x] `id` attributes on `<h2>` headings (jump-to + anchor links)
 
+## Content creation skills
+
+Two Claude Code skills in `skills/` handle all content work:
+
+### `blockrocket-voice` (`/blockrocket-voice`)
+Write or edit any BlockRocket content — website copy, blog posts, LinkedIn, X — in the authentic voices of Andy Gray and James Morgan. Voice reference files: `skills/blockrocket-voice/references/`. Run the linter after drafting:
+```bash
+node plans/lint-voice.js content/blog/<file>.mdx
+```
+
+### `blockrocket-interview` (`/blockrocket-interview`)
+Run a structured founder interview session: captures answers into `plans/04-interview-questions.md`, updates the story backlog at `skills/blockrocket-interview/references/story-moments.md`, and generates draft blog skeletons in `content/blog/` (always with `draft: true`). Narrative strategy docs: `plans/` — see `plans/README.md`.
+
 ## Do NOT do
 
 - **Do not edit** `public/css/base.css`, `public/css/blockrocket.css`, or `public/js/site.js` — treat as vendor files from the Webflow export

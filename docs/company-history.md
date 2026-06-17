@@ -56,6 +56,7 @@ Andy runs **Frontier Fridays**, a weekly Manchester drop-in event for builders w
 | **CUDO Compute** | Decentralised cloud computing infrastructure |
 | **TokenLandia** | Physical asset tokenisation and digital identity |
 | **BrewDog** | Blockchain-based ownership and provenance for craft beer |
+| **Art Blocks / Erick Calderon (Snowfro)** | Early "Interface Token" art-NFT prototyping (2018, BlockRocket's 2nd paid engagement, met at CoinFest Manchester 2018); later built the first version of the Art Blocks smart contracts — the original contract still tracks Chromie Squiggles. *(Founder-stated June 2026; verify scope/year/volume before public use.)* |
 
 ---
 

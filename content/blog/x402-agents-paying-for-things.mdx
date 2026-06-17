@@ -1,0 +1,51 @@
+---
+draft: true
+title: 'x402: The Day HTTP 402 Finally Did Something'
+excerpt: HTTP reserved status code 402 "Payment Required" in the 1990s and nobody used it for thirty years. Now AI agents are settling millions of stablecoin payments through it. We are paying attention.
+date: '2026-06-12'
+thumbLabel: Frontier
+readTime: '7 min read'
+tags:
+  - label: Frontier
+    highlight: true
+  - label: Stablecoins
+  - label: AI Agents
+---
+
+HTTP status code **402 — Payment Required** sat reserved and unused in the spec for thirty years. In May 2025 [Coinbase launched x402](https://docs.cdp.coinbase.com/x402/welcome), an open standard that finally puts it to work: a server replies 402 with payment terms, the client (increasingly, an AI agent) pays in stablecoins on-chain, retries the request, and gets the resource. No API keys, no card forms, no subscription to a thing you need exactly once.
+
+The pitch is machine-speed micropayments for the agent economy. The traction says it's more than a pitch.
+
+## The numbers (as of mid-2026)
+
+- [119M+ transactions on Base, 35M+ on Solana](https://stablecoininsider.org/x402-protocol/), roughly $600M annualised volume, zero protocol fees
+- April 2026: Coinbase contributed the protocol to the **Linux Foundation** — a neutral home, with the x402 Foundation now including **Google and Visa**
+- Settlement is overwhelmingly **USDC**; [Stellar](https://stellar.org/blog/foundation-news/x402-on-stellar) and others are adding native support
+
+[NEEDS: James's take — does the Linux Foundation move change your conviction level? You wrote in Feb 2025 that AI × crypto "still needs a breakthrough use case". Is this it, or still waiting?]
+
+## Why we're paying attention
+
+This sits exactly at the intersection we said was underbaked: AI needing crypto rails rather than just sharing a narrative with them. An agent can't pass a card-network KYC flow mid-task; it can sign a USDC transfer in milliseconds. Composable money meets composable software.
+
+[NEEDS: Andy — have you wired x402 into anything yet? Even a toy. The stablemoney.dev angle is obvious: does it grow an x402 column/section?]
+
+```js
+// the shape of it: agent hits a paid endpoint
+const res = await fetch('https://api.example.com/data');
+if (res.status === 402) {
+  const terms = await res.json();          // amount, asset, payTo, network
+  const receipt = await wallet.pay(terms); // signed USDC transfer
+  return fetch('https://api.example.com/data', {
+    headers: { 'X-PAYMENT': receipt },
+  });
+}
+```
+
+## The open questions
+
+Whether x402 becomes the default agent-payment rail or one of several [remains to be seen](https://aminagroup.com/research/agentic-payments-explained-how-ai-agents-use-crypto-stablecoins-x402-and-mpp/) — MPP and other schemes are circling the same problem. Pricing discovery for machine consumers, refund semantics, and what regulators make of autonomous spending are all live questions. [NEEDS: founders' top open question in their own words]
+
+We think the boring version of the future is the likely one: x402 disappears into infrastructure, the way nobody thinks about TLS. The interesting work is what gets built on top — and that's the bit we like.
+
+Building something agent-shaped and wondering how it pays for itself? Get in touch! — [human@blockrocket.tech](mailto:human@blockrocket.tech)

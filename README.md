@@ -157,6 +157,24 @@ npm run build
 | `/blog/` or `/blog` | `dist/blog/index.html` |
 | `/blog/:slug` | `dist/blog/:slug.html` |
 
+## Content workflow
+
+Blog posts and page copy are produced using two Claude Code skills:
+
+| Skill | Invoke | Purpose |
+|---|---|---|
+| `blockrocket-voice` | `/blockrocket-voice` | Write/edit in Andy & James's authentic voices (website, blog, LinkedIn, X) |
+| `blockrocket-interview` | `/blockrocket-interview` | Run a structured founder interview; captures answers and generates draft blog skeletons |
+
+Draft blog skeletons are saved to `content/blog/` with `draft: true` in frontmatter — the build pipeline excludes them from listings until `draft` is removed or set to `false`.
+
+Run the voice linter after drafting to catch AI-tells:
+```bash
+node plans/lint-voice.js content/blog/<file>.mdx
+```
+
+Narrative strategy, interview Q&A log, and voice style guide live in `plans/` — see `plans/README.md`.
+
 ## Company context
 
 **BlockRocket** was founded in 2018 by **Andy Gray** and **James Morgan**, emerging from the Manchester blockchain community they helped build. The duo co-created **Blockchain Manchester** and launched **KnownOrigin** — one of Ethereum's earliest digital art platforms — which was acquired by **eBay in 2022**.
