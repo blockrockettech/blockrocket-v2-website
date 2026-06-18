@@ -154,6 +154,13 @@
    Blog grid: top-align cards so rows flush when titles differ
    ============================================================ */
 
+/* Reduce cover image from 16/9 (~675px) to 21/9 (~514px) */
+.featured-image {
+  aspect-ratio: 21/9;
+}
+
+
+
 .card-grid.blog {
   align-items: start;
 }
