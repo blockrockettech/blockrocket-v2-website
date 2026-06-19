@@ -22,8 +22,8 @@
         </div>
       </div>
     </div>
-    <img src="/images/half-blocks-left.png" loading="lazy" data-aos="fade-up" alt="" class="left-half-block blog">
-    <img src="/images/half-blocks-right.png" loading="lazy" data-aos="fade-up" alt="" class="right-half-block blog">
+    <img src="/images/half-blocks-left.png" loading="lazy" alt="" class="left-half-block blog">
+    <img src="/images/half-blocks-right.png" loading="lazy" alt="" class="right-half-block blog">
   </div>
 
   {% if featuredPost %}
@@ -60,16 +60,16 @@
   </div>
   {% endif %}
 
-  <div data-aos="fade-up" class="section_blog_grid">
+  <div class="section_blog_grid">
     <div class="container blog-parent">
-      <div data-aos="fade-up" class="header-wrapper blog">
+      <div class="header-wrapper blog">
         <h2 class="h2-style black">Recent Blogs</h2>
         <div class="w-layout-vflex lead-text">
           <p class="body-regular left black">Explore our latest thinking on blockchain, identity, and tokenisation.</p>
         </div>
       </div>
 
-      <div data-aos="fade-up" class="tag-filter-row">
+      <div class="tag-filter-row">
         <a href="#" class="blog-filter active w-inline-block" data-filter="all">
           <div class="filter-txt">All</div>
         </a>
@@ -80,9 +80,9 @@
         {% endfor %}
       </div>
 
-      <div data-aos="fade-up" class="card-grid blog" id="blog-grid">
+      <div class="card-grid blog" id="blog-grid">
         {% for post in posts %}
-        <a data-aos="fade-up" href="{{ post.url }}" class="blog-card dark w-inline-block"
+        <a href="{{ post.url }}" class="blog-card dark w-inline-block"
            data-tags="{{ post.tagsCsv }}">
           <img src="{{ '/images/' + post.coverImage if post.coverImage else '/images/news-img-block-2_1news-img-block-2.avif' }}"
                loading="lazy"

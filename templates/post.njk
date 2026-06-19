@@ -40,8 +40,8 @@
         </div>
       </div>
     </div>
-    <img src="/images/half-blocks-left.png" loading="lazy" data-aos="fade-up" alt="" class="left-half-block blog">
-    <img src="/images/half-blocks-right.png" loading="lazy" data-aos="fade-up" alt="" class="right-half-block blog">
+    <img src="/images/half-blocks-left.png" loading="lazy" alt="" class="left-half-block blog">
+    <img src="/images/half-blocks-right.png" loading="lazy" alt="" class="right-half-block blog">
   </div>
 
   {% if post.coverImage %}
@@ -57,13 +57,13 @@
   </div>
   {% endif %}
 
-  <div data-aos="fade-up" class="section_blog_content">
+  <div class="section_blog_content">
     <div class="blog-content-grid">
-      <div data-aos="fade-up" class="blog-rich-text w-richtext">
+      <div class="blog-rich-text w-richtext">
         {{ post.content | safe }}
       </div>
       <div class="content-right">
-        <div data-aos="fade-up" class="side-panel">
+        <div class="side-panel">
           <div class="social-share">
             <div class="black-eyebrow blog-panel">SHARE THIS ARTICLE</div>
             <div class="social-icons-wrapper">
@@ -95,9 +95,9 @@
       <div class="module-eyebrow"><img src="/images/black-icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
         <div class="black-eyebrow">READ MORE</div>
       </div>
-      <div data-aos="fade-up" class="read-more-grid blog">
+      <div class="read-more-grid blog">
         {% for related in relatedPosts %}
-        <a data-aos="fade-up" href="{{ related.url }}" class="blog-card dark w-inline-block">
+        <a href="{{ related.url }}" class="blog-card dark w-inline-block">
           <img src="{{ '/images/' + related.coverImage if related.coverImage else '/images/news-img-block-2_1news-img-block-2.avif' }}"
                loading="lazy" alt="{{ related.title }}" class="blog-img">
           <div class="blog-content">
