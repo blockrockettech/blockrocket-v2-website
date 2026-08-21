@@ -3,6 +3,7 @@
 <head>
   {% set pageTitle = "BlockRocket | Expert Blockchain Engineering & Web3 Consultancy" %}
   {% set pageDescription = "High-performance blockchain solutions for enterprise and startups. From smart contract auditing to full-stack Web3 engineering, we build production-ready systems." %}
+  {% set extraStylesheet = "/css/story.css" %}
   {% include "_partials/head.njk" %}
 </head>
 <body class="body" data-screen-label="Home">
@@ -27,40 +28,54 @@
     <div class="hero-blur"></div>
   </div>
 
-  <div id="about" class="section_about">
-    <div class="container">
-      <div class="flex-grid">
-        <div data-aos="fade-up" class="left-col-wrapper">
-          <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-            <div class="green-eyebrow">{{ home.about.eyebrow }}</div>
-          </div>
-          <div class="h2-style">{{ home.about.heading }}</div>
-          <div class="w-layout-vflex lead-text">
-            {% for para in home.about.paragraphs %}
-            <p class="body-regular left">{{ para | bodyBold | safe }}</p>
-            {% endfor %}
-          </div>
-        </div>
-        <img data-aos="fade-up" class="image" src="/images/nft-img_1nft-img.avif" alt="{{ home.about.imageAlt }}" sizes="(max-width: 1659px) 100vw, 1659px" loading="lazy" srcset="/images/nft-img_1-p-500.avif 500w, /images/nft-img_1nft-img.avif 1659w">
+  <div id="story" class="section_timeline">
+    <div data-aos="fade-up" class="timeline-header">
+      <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
+        <div class="green-eyebrow">{{ home.storyTeaser.eyebrow }}</div>
+      </div>
+      <h2 class="h2-style">{{ home.storyTeaser.heading }}</h2>
+      <div class="w-layout-vflex lead-text">
+        <p class="body-regular left" style="text-align:center;">{{ home.storyTeaser.lead }}</p>
       </div>
     </div>
-    <div class="container">
-      <div class="flex-grid">
-        <img data-aos="fade-up" class="image" src="/images/manchester_1manchester.avif" alt="{{ home.aboutHistory.imageAlt }}" sizes="(max-width: 1106px) 100vw, 1106px" id="w-node-eac2862a-6122-f9a0-c1ec-77d6ff313d49-f86bc39c" loading="lazy" srcset="/images/manchester_1-p-500.avif 500w, /images/manchester_1manchester.avif 1106w">
-        <div data-aos="fade-up" class="left-col-wrapper">
-          <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-            <div class="green-eyebrow">{{ home.aboutHistory.eyebrow }}</div>
+
+    <div class="timeline">
+      {% for entry in home.storyTeaser.entries %}
+      <div data-aos="fade-up" class="timeline-row {{ entry.side }}">
+        {% if entry.side == 'left' %}
+          <div class="timeline-card">
+            <div class="timeline-card-eyebrow">{{ entry.category }}</div>
+            <h3 class="timeline-card-title">{{ entry.title }}</h3>
+            <p class="timeline-card-body">{{ entry.body }}</p>
+            {% if entry.image %}
+            <div class="timeline-card-image" style="background-image: {{ 'linear-gradient(#05da774d, #05da774d), ' if entry.imageOverlay }}url('/images/{{ entry.image }}'); background-size: {{ 'auto, cover' if entry.imageOverlay else 'cover' }};" role="img" aria-label="{{ entry.imageAlt }}"></div>
+            {% endif %}
           </div>
-          <div class="w-layout-vflex lead-text">
-            {% for para in home.aboutHistory.paragraphs %}
-            <p class="body-regular left">{{ para | bodyBold | safe }}</p>
-            {% endfor %}
+          <div class="timeline-node">
+            <span class="timeline-dot"></span>
+            <span class="timeline-year">{{ entry.year }}</span>
           </div>
-        </div>
+          <div></div>
+        {% else %}
+          <div></div>
+          <div class="timeline-node">
+            <span class="timeline-dot"></span>
+            <span class="timeline-year">{{ entry.year }}</span>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card-eyebrow">{{ entry.category }}</div>
+            <h3 class="timeline-card-title">{{ entry.title }}</h3>
+            <p class="timeline-card-body">{{ entry.body }}</p>
+            {% if entry.image %}
+            <div class="timeline-card-image" style="background-image: {{ 'linear-gradient(#05da774d, #05da774d), ' if entry.imageOverlay }}url('/images/{{ entry.image }}'); background-size: {{ 'auto, cover' if entry.imageOverlay else 'cover' }};" role="img" aria-label="{{ entry.imageAlt }}"></div>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
+      {% endfor %}
     </div>
-    <img src="/images/half-blocks-left.png" loading="lazy" data-aos="fade-up" alt="" class="left-half-block">
-    <img src="/images/half-blocks-right.png" loading="lazy" data-aos="fade-up" alt="" class="right-half-block">
+
+    <a href="{{ home.storyTeaser.ctaHref }}" class="secondary-button w-button" style="display:block; width:fit-content; margin:56px auto 0;">{{ home.storyTeaser.ctaLabel }}</a>
   </div>
 
   {# OUR APPROACH — hidden, may restore later
@@ -99,31 +114,6 @@
     </div>
   </div>
   #}
-
-  <div id="case-studies" class="section_case-studies">
-    <div class="container approach">
-      <div data-aos="fade-up" class="header-wrapper">
-        <div class="module-eyebrow"><img src="/images/icon.svg" loading="lazy" width="10.392416000366211" height="12" alt="" class="icon">
-          <div class="green-eyebrow">{{ home.caseStudies.eyebrow }}</div>
-        </div>
-        <h2 class="h2-style">{{ home.caseStudies.heading }}</h2>
-        <div class="w-layout-vflex lead-text">
-          <p class="body-regular left">{{ home.caseStudies.lead }}</p>
-        </div>
-      </div>
-      <div class="case-studies-grid">
-        <div data-aos="fade-up" id="w-node-_66edd9a2-d3e1-4155-24f6-473270acd461-f86bc39c" class="w-layout-hflex case-study-card one">
-          <div class="cs-wrapper"><div class="w-layout-hflex tag-wrapper"><div class="tag"><div class="text">ERC-721</div></div><div class="tag"><div class="text">ERC-721</div></div></div></div>
-        </div>
-        <div data-aos="fade-up" class="w-layout-hflex case-study-card">
-          <div class="cs-wrapper three"><div class="w-layout-hflex tag-wrapper"><div class="tag"><div class="text">ERC-721</div></div><div class="tag"><div class="text">ERC-721</div></div></div></div>
-        </div>
-        <div data-aos="fade-up" class="w-layout-hflex case-study-card">
-          <div class="cs-wrapper five"><div class="w-layout-hflex tag-wrapper"><div class="tag"><div class="text">ERC-721</div></div><div class="tag"><div class="text">ERC-721</div></div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div id="team" class="section_team">
     <div class="container services">
@@ -214,6 +204,7 @@
     <img src="/images/half-blocks-left.png" loading="lazy" data-aos="fade-up" alt="" class="left-half-block blog">
   </div>
 
+  {# SERVICES — hidden, may restore later
   <div id="services" data-aos="fade-up" class="section_services">
     <div class="container services">
       <div data-aos="fade-up" class="header-wrapper">
@@ -250,6 +241,7 @@
       </div>
     </div>
   </div>
+  #}
 
   <div id="contact" class="section_contact">
     <div class="container contact">
