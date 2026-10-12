@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node scripts/build.js",
     "dev": "concurrently \"node scripts/watch.js\" \"lite-server\"",
-    "start": "lite-server"
+    "start": "node server.js",
+    "serve:dev": "lite-server"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

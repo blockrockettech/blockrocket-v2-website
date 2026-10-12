@@ -13,7 +13,8 @@ Built as a static site from a Webflow export. CSS/JS from the Webflow export is 
 | Markdown → HTML | [marked](https://marked.js.org/) |
 | Dev server | [lite-server](https://github.com/johnpapa/lite-server) (browser-sync) |
 | File watching | [chokidar](https://github.com/paulmillr/chokidar) |
-| Deployment | [Vercel](https://vercel.com) (static, `dist/` output) |
+| Production server | `server.js` — zero-dependency Node server for `dist/` |
+| Hosting | [Coolify](https://coolify.io) on [Hetzner](https://www.hetzner.com) |
 
 ## Getting started
 
@@ -26,6 +27,7 @@ Or for a one-off build:
 
 ```bash
 npm run build     # outputs to dist/
+npm start         # serve dist/ with the production server on http://localhost:3000
 ```
 
 ## Current site shape
@@ -65,10 +67,10 @@ blockrocket-v2-website/
 ├── scripts/
 │   ├── build.js          ← main build pipeline
 │   └── watch.js          ← chokidar watcher for dev
-├── dist/                 ← generated output (gitignored, Vercel deploys this)
+├── dist/                 ← generated output (gitignored)
 ├── .env                  ← local env vars (optional, gitignored)
-├── bs-config.js          ← lite-server config
-└── vercel.json           ← build + rewrite config
+├── bs-config.js          ← lite-server config (dev only)
+└── server.js             ← production server: static files, clean URLs, /api/health
 ```
 
 ## Writing blog posts
@@ -132,22 +134,35 @@ Create `.env` if you need local overrides:
 | `SITE_NAME` | Site name used in meta | `BlockRocket` |
 | `GA_TRACKING_ID` | Google Analytics ID (optional) | `G-XXXXXXXXXX` |
 
-Set these same variables in your Vercel project settings for production builds.
+Set these same variables in the Coolify application's environment variables for production. They're read at build time, so redeploy after changing them. `PORT` (default `3000`) controls the port `server.js` listens on.
 
 ## Deployment
 
-The repo auto-deploys to Vercel on push to `main`. `vercel.json` configures:
+The site runs on [Coolify](https://coolify.io) on a Hetzner server and redeploys on push to `main`. Configure the Coolify application as a Node app (Nixpacks), not a static site, so `server.js` runs:
 
 - **Build command:** `npm run build`
-- **Output directory:** `dist`
-- **Rewrites:** `/blog` and `/blog/:slug` → clean URLs without `.html`
+- **Start command:** `npm start` (`node server.js`)
+- **Port:** `3000`
+- **Health check path:** `/api/health`
 
-For a manual deploy:
+`server.js` serves `dist/`, resolves clean URLs (`/blog/my-post` → `dist/blog/my-post.html`), and returns 404 for anything else.
 
-```bash
-npm run build
-# then push — Vercel picks it up automatically
+### Health check
+
+`GET /api/health` returns:
+
+```json
+{
+  "status": "ok",
+  "version": "1.0.0",
+  "commit": "dcaa792…",
+  "uptime": 3600,
+  "startedAt": "2026-10-12T10:00:00.000Z",
+  "timestamp": "2026-10-12T11:00:00.000Z"
+}
 ```
+
+It returns `200` when `dist/index.html` exists and `503` if the build output is missing. `commit` comes from Coolify's `SOURCE_COMMIT` env var (`null` locally).
 
 ## URLs
 
@@ -156,6 +171,8 @@ npm run build
 | `/` | `dist/index.html` |
 | `/blog/` or `/blog` | `dist/blog/index.html` |
 | `/blog/:slug` | `dist/blog/:slug.html` |
+| `/story-so-far` | `dist/story-so-far.html` |
+| `/api/health` | health check JSON (from `server.js`) |
 
 ## Content workflow
 
