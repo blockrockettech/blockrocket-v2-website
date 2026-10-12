@@ -13,7 +13,7 @@ Static marketing + blog site for BlockRocket (blockrocket.tech). Exported from W
 - **marked** — markdown → HTML conversion
 - **lite-server** — dev server (browser-sync wrapper)
 - **chokidar** — file watcher for dev mode
-- **Vercel** — deployment (static, `dist/` folder)
+- **Coolify on Hetzner** — deployment; `server.js` (zero-dependency Node server) serves `dist/`, handles clean URLs, and exposes `GET /api/health`
 - **Formspree AJAX** — homepage contact form submission via CDN-loaded vanilla JS
 
 ## Build pipeline (`scripts/build.js`)
@@ -61,6 +61,7 @@ scripts/
   build.js           ← full build pipeline
   watch.js           ← chokidar watcher (calls build.js on any change)
 dist/                ← generated output (gitignored)
+server.js            ← production server (static files, clean URLs, /api/health)
 ```
 
 ## Frontmatter schema (content/blog/*.md)
@@ -141,7 +142,7 @@ These are defined in `blockrocket.css` and must not be changed:
 1. Create `templates/my-page.njk`
 2. Create a matching `content/pages/my-page.mdx` file if the page content should be frontmatter-driven
 3. Add a render call in `scripts/build.js` (follow the pattern for `index.njk` / `story-so-far.njk`)
-4. Add a rewrite in `vercel.json` if you want a clean URL
+4. Clean URLs work automatically — `server.js` maps `/my-page` to `dist/my-page.html`
 
 ## Adding/changing navigation links
 
@@ -202,7 +203,10 @@ The featured post on `/blog/index.html` is always `posts[0]` — the most recent
 2. Add `coverImage: my-image.avif` to the post's frontmatter
 
 ### Update production env vars
-Set `SITE_URL=https://blockrocket.tech` in Vercel project settings. This controls canonical URLs and OG image absolute paths.
+Set `SITE_URL=https://blockrocket.tech` in the Coolify application's environment variables (must be available at build time). This controls canonical URLs and OG image absolute paths.
 
 ### Deploy
-Push to `main` — Vercel auto-deploys via `npm run build` + `dist/` as configured in `vercel.json`.
+Push to `main` — Coolify builds with `npm run build` and runs `npm start` (`node server.js`, listens on `PORT`, default 3000). Clean-URL rewrites (`/blog`, `/blog/:slug`, `/story-so-far`) are handled in `server.js`.
+
+### Health check
+`GET /api/health` returns JSON `{ status, version, commit, uptime, startedAt, timestamp }` — 200 when `dist/index.html` exists, 503 otherwise. `commit` comes from Coolify's `SOURCE_COMMIT` env var. Point Coolify's health check at path `/api/health`, port 3000.
