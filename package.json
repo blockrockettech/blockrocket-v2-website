@@ -2,6 +2,9 @@
   "name": "blockrocket-v2-website",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.23.4 <23"
+  },
   "scripts": {
     "build": "node scripts/build.js",
     "dev": "concurrently \"node scripts/watch.js\" \"lite-server\"",

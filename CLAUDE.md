@@ -8,6 +8,7 @@ Static marketing + blog site for BlockRocket (blockrocket.tech). Exported from W
 
 ## Stack
 
+- **Node.js 22 LTS** — pinned via `.nvmrc` and `package.json` `engines` (currently `22.23.4`, Oct 2026 security release)
 - **Nunjucks** — HTML templating (`templates/`)
 - **gray-matter** — YAML frontmatter parsing from `.md` / `.mdx` files
 - **marked** — markdown → HTML conversion
