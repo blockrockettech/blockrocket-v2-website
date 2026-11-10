@@ -1,4 +1,4 @@
-/* story.css — layout styles for /story-so-far only */
+/* story.css — timeline/chapter layout styles, used on /story-so-far and the homepage story teaser */
 
 /* ── Hero ── */
 .story-hero {
@@ -206,6 +206,15 @@
 .timeline-card-body strong {
   color: var(--base--white);
   font-weight: 600;
+}
+
+.timeline-card-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 6px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 4px;
 }
 
 /* ── Pull quote ── */
