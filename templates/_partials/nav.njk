@@ -3,11 +3,4 @@
   <a href="{{ '/' if not isHome else '#hero' }}" class="nav-logo w-inline-block"><img width="126" height="56" alt="BlockRocket Logo" src="/images/nav-logo-wrapper.svg" loading="lazy" class="nav-logo-wrapper"></a>
   <a href="{{ '/#contact' if not isHome else '#contact' }}" class="primary-button w-button">Contact Us</a>
   <div class="gradient-line"></div>
-  {% if isHome %}
-  <div class="link-wrapper">
-    <a href="#story" class="nav-link">Story</a>
-    <a href="#team" class="nav-link">Team</a>
-    <a href="#blog" class="nav-link">Blog</a>
-  </div>
-  {% endif %}
 </nav>

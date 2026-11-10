@@ -147,11 +147,9 @@ These are defined in `blockrocket.css` and must not be changed:
 
 ## Adding/changing navigation links
 
-Edit `templates/_partials/nav.njk`. The nav has two states controlled by `isHome`:
-- `isHome = true` — shows the full link bar (`#about`, `#services`, etc.)
-- `isHome = false` — simplified nav (logo only + Contact Us CTA)
+Edit `templates/_partials/nav.njk`. The nav is just the logo + Contact Us CTA on every page (the in-page anchor link bar was removed). `isHome` only changes where those two links point: on the homepage they're in-page anchors (`#hero`, `#contact`); elsewhere they link back to `/` and `/#contact`.
 
-Set `{% set isHome = true %}` only in `index.njk`.
+Set `{% set isHome = true %}` only in `index.njk`. The phishing warning banner (`_partials/warning-banner.njk`) is included at the top of `nav.njk`, so it appears on every page.
 
 ## SEO checklist (already implemented)
 
