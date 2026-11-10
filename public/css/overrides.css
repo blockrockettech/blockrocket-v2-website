@@ -456,7 +456,7 @@ End Option C */
 /* ---------- Phishing warning banner (templates/_partials/warning-banner.njk) ---------- */
 
 .site-warning {
-  position: fixed;
+  position: absolute; /* scrolls away with the page; the nav stays pinned */
   top: 0;
   left: 0;
   right: 0;
@@ -484,7 +484,8 @@ End Option C */
 }
 
 .nav {
-  top: var(--site-warning-h, 40px);
+  /* banner height minus scroll distance: nav sits under the banner at the top, then pins to 0 */
+  top: var(--site-warning-offset, var(--site-warning-h, 40px));
 }
 
 @media screen and (max-width: 479px) {
@@ -493,4 +494,50 @@ End Option C */
     padding: 8px 16px;
     text-align: left;
   }
+}
+
+/* --- Accessibility + banner dismiss + honeypot + team links (review/p0-technical-fixes) --- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 2000;
+  padding: 10px 16px;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  border-radius: 4px;
+}
+.skip-link:focus {
+  left: 8px;
+}
+.site-warning[hidden] {
+  display: none;
+}
+.site-warning a {
+  color: inherit;
+  text-decoration: underline;
+}
+.site-warning-close {
+  flex: 0 0 auto;
+  margin-left: 8px;
+  padding: 4px 10px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.team-socials {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }

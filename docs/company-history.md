@@ -30,9 +30,9 @@ In June 2022, eBay acquired KnownOrigin in an undisclosed deal. By the time of a
 
 The acquisition was notable as one of the first major e-commerce company acquisitions of an NFT marketplace and reflected eBay's push into digital collectibles.
 
-### 2023–2024 — Return to Independence
+### 2024–2026 — Return to Independence
 
-Following eBay's February 2024 layoffs (approximately 30% of staff), the KnownOrigin marketplace was shut down in July 2024. Andy and James returned to BlockRocket, refocusing the consultancy with the depth of experience gained from building, scaling, and exiting KnownOrigin.
+eBay's February 2024 layoffs hit about 30% of the KnownOrigin/Web3 team (not 30% of eBay staff), and the marketplace was wound down from July 2024 (existing NFTs remain on Ethereum). Andy and James left eBay at the end of 2025 and returned to BlockRocket in 2026, refocusing the consultancy with the depth of experience gained from building, scaling, and exiting KnownOrigin. The website deliberately keeps these dates vague (founder decision, 10 Nov 2026).
 
 ### 2024–Present — BlockRocket v2
 
@@ -56,7 +56,7 @@ Andy runs **Frontier Fridays**, a weekly Manchester drop-in event for builders w
 | **CUDO Compute** | Decentralised cloud computing infrastructure |
 | **TokenLandia** | Physical asset tokenisation and digital identity |
 | **BrewDog** | Blockchain-based ownership and provenance for craft beer |
-| **Art Blocks / Erick Calderon (Snowfro)** | Early "Interface Token" art-NFT prototyping (2018, BlockRocket's 2nd paid engagement, met at CoinFest Manchester 2018); later built the first version of the Art Blocks smart contracts — the original contract still tracks Chromie Squiggles. *(Founder-stated June 2026; verify scope/year/volume before public use.)* |
+| **Art Blocks / Erick Calderon (Snowfro)** | Early "Interface Token" art-NFT prototyping (2018, BlockRocket's 2nd paid engagement, met at CoinFest Manchester 2018); later built the first version of the Art Blocks smart contracts — the original contract still tracks Chromie Squiggles. *(Founder-stated June 2026; verify scope/year/volume before public use. Removed from the homepage 10 Nov 2026 pending evidence: Art Blocks' own history says the contract was rewritten in 2020, before the Nov 2020 Squiggles launch.)* |
 
 ---
 

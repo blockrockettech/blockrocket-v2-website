@@ -81,27 +81,28 @@ function copyDirSync(src, dest) {
   }
 }
 
-// Extract ## headings from markdown source for the "Jump To" sidebar
-function extractHeadings(markdown) {
-  const headings = [];
-  for (const line of markdown.split('\n')) {
-    const match = line.match(/^##\s+(.+)$/);
-    if (match) {
-      const text = match[1].replace(/\*\*/g, '').replace(/`/g, '').trim();
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-      headings.push({ text, id });
-    }
-  }
-  return headings;
+// One source of truth for heading ids. The renderer assigns each <h2> a unique id and
+// records it for the "Jump To" sidebar, so links can never drift from the rendered ids
+// (e.g. headings containing links or inline code, or two headings with the same text).
+function headingSlug(text) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-// Add id attributes to <h2> tags in rendered HTML so jump-to links work
-function addHeadingIds(html) {
-  return html.replace(/<h2>(.*?)<\/h2>/g, (_, inner) => {
-    const text = inner.replace(/<[^>]+>/g, '');
-    const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    return `<h2 id="${id}">${inner}</h2>`;
-  });
+function renderMarkdown(markdown) {
+  const headings = [];
+  const used = new Set();
+  const renderer = new marked.Renderer();
+  // marked v12 passes (renderedInlineHtml, level, plainText)
+  renderer.heading = (text, level, raw) => {
+    if (level !== 2) return `<h${level}>${text}</h${level}>\n`;
+    const base = headingSlug(raw) || 'section';
+    let id = base;
+    for (let n = 2; used.has(id); n++) id = `${base}-${n}`;
+    used.add(id);
+    headings.push({ text: raw, id });
+    return `<h2 id="${id}">${text}</h2>\n`;
+  };
+  return { html: marked.parse(markdown, { renderer }), headings };
 }
 
 function loadPageContent(name) {
@@ -117,16 +118,18 @@ function loadPosts() {
     .map(filename => {
       const raw = fs.readFileSync(path.join(CONTENT_DIR, filename), 'utf8');
       const { data, content } = matter(raw);
+      for (const key of ['title', 'excerpt', 'date']) {
+        if (!data[key]) throw new Error(`content/blog/${filename}: missing required frontmatter "${key}"`);
+      }
       const slug = slugify(filename);
-      const htmlContent = addHeadingIds(marked(content));
-      const headings = extractHeadings(content);
+      const { html: htmlContent, headings } = renderMarkdown(content);
       return {
         ...data,
         slug,
         content: htmlContent,
         headings,
         tagsCsv: (data.tags || []).map(t => t.label.toLowerCase()).join(','),
-        url: `/blog/${slug}.html`,
+        url: `/blog/${slug}`, // clean URL; the file is written to dist/blog/${slug}.html
       };
     })
     .filter(post => !post.draft)
@@ -182,6 +185,16 @@ function build() {
     assetVersion,
   };
 
+  // Production builds must never ship localhost canonicals / OG URLs. Coolify injects
+  // SOURCE_COMMIT; NODE_ENV=production also counts. Set SITE_URL as a *build* variable.
+  const isProdBuild = Boolean(process.env.SOURCE_COMMIT) || process.env.NODE_ENV === 'production';
+  if (isProdBuild && /localhost|127\.0\.0\.1/.test(siteConfig.url)) {
+    throw new Error(
+      `SITE_URL is "${siteConfig.url}". Set SITE_URL=https://blockrocket.tech as a build variable before deploying.`
+    );
+  }
+  siteConfig.url = siteConfig.url.replace(/\/+$/, '');
+
   // Create dist/blog/
   fs.mkdirSync(path.join(DIST_DIR, 'blog'), { recursive: true });
 
@@ -208,7 +221,7 @@ function build() {
     featuredPost,
     allTags,
     site: siteConfig,
-    pageUrl: '/blog/index.html',
+    pageUrl: '/blog/',
   });
   fs.writeFileSync(path.join(DIST_DIR, 'blog', 'index.html'), blogHtml);
   console.log('[build]   /blog/index.html');
@@ -227,12 +240,34 @@ function build() {
   const storyHtml = nunjucks.render('story-so-far.njk', {
     story,
     site: siteConfig,
-    pageUrl: '/story-so-far.html',
+    pageUrl: '/story-so-far',
   });
   fs.writeFileSync(path.join(DIST_DIR, 'story-so-far.html'), storyHtml);
   console.log('[build]   /story-so-far.html');
 
-  console.log(`[build] Done — ${posts.length} post(s), ${posts.length + 3} page(s) generated`);
+  // 404 page (server.js serves dist/404.html with a 404 status)
+  fs.writeFileSync(path.join(DIST_DIR, '404.html'), nunjucks.render('404.njk', { site: siteConfig, pageUrl: '/404' }));
+  console.log('[build]   /404.html');
+
+  // sitemap.xml + robots.txt
+  const fmtDate = d => (d instanceof Date ? d : new Date(String(d) + 'T12:00:00')).toISOString().slice(0, 10);
+  const sitemapEntries = [
+    { loc: '/' },
+    { loc: '/story-so-far' },
+    { loc: '/blog/', lastmod: posts[0] ? fmtDate(posts[0].date) : undefined },
+    ...posts.map(p => ({ loc: p.url, lastmod: fmtDate(p.date) })),
+  ];
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    sitemapEntries
+      .map(e => `  <url><loc>${siteConfig.url}${e.loc}</loc>${e.lastmod ? `<lastmod>${e.lastmod}</lastmod>` : ''}</url>`)
+      .join('\n') +
+    `\n</urlset>\n`;
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemap);
+  fs.writeFileSync(path.join(DIST_DIR, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteConfig.url}/sitemap.xml\n`);
+  console.log('[build]   /sitemap.xml, /robots.txt');
+
+  console.log(`[build] Done — ${posts.length} post(s), ${posts.length + 4} page(s) generated`);
 }
 
 build();
