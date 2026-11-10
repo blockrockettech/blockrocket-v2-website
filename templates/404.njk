@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% set pageTitle = "Page not found | BlockRocket" %}
+  {% set pageDescription = "That page doesn't exist. Head back to the BlockRocket homepage." %}
+  {% set robotsMeta = "noindex, follow" %}
+  {% include "_partials/head.njk" %}
+</head>
+<body class="body" data-screen-label="404">
+  {% set isHome = false %}
+  {% include "_partials/nav.njk" %}
+  <main id="main">
+    <div class="section_hero">
+      <div class="container">
+        <div class="main-content">
+          <div class="w-layout-vflex top-content-wrapper">
+            <div class="eyebrow">404</div>
+            <h1 class="heading-1">Page not found</h1>
+            <div class="lead-text">
+              <div class="lead-text centre"><span class="text-regular">That link has wandered off the map. Try the homepage, or read the story so far.</span></div>
+            </div>
+          </div>
+          <a href="/" class="primary-button w-button">Back to the homepage</a>
+        </div>
+      </div>
+      <div class="hero-blur"></div>
+    </div>
+  </main>
+
+  {% include "_partials/footer.njk" %}
+  {% include "_partials/scripts.njk" %}
+</body>
+</html>

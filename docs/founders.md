@@ -22,7 +22,8 @@ After the KnownOrigin acquisition by eBay in June 2022, Andy joined eBay as a Di
 | 2015–2017 | Built Manchester blockchain community |
 | 2018 | Co-founded BlockRocket and KnownOrigin |
 | 2022 | KnownOrigin acquired by eBay; joined eBay as Director |
-| 2024 | Returned to BlockRocket as independent consultancy |
+| End 2025 | Left eBay |
+| 2026 | Back at BlockRocket as independent consultancy |
 | Ongoing | Runs Frontier Fridays (Manchester) |
 
 ---
@@ -50,7 +51,8 @@ After the KnownOrigin acquisition by eBay in June 2022, James joined eBay as par
 | 2018 | Co-founded BlockRocket and KnownOrigin |
 | 2020 | Co-authored EIP-2981 (NFT Royalty Standard) |
 | 2022 | KnownOrigin acquired by eBay; joined eBay; presented EIP-2981 at ETHDenver |
-| 2024 | Returned to BlockRocket |
+| End 2025 | Left eBay |
+| 2026 | Back at BlockRocket |
 
 ---
 

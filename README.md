@@ -173,6 +173,10 @@ It returns `200` when `dist/index.html` exists and `503` if the build output is 
 | `/blog/:slug` | `dist/blog/:slug.html` |
 | `/story-so-far` | `dist/story-so-far.html` |
 | `/api/health` | health check JSON (from `server.js`) |
+| `/sitemap.xml`, `/robots.txt` | generated at build from `SITE_URL` |
+| any unknown path | `dist/404.html` with a 404 status (noindex) |
+
+Requests for `*.html` (e.g. `/story-so-far.html`) are 301-redirected to the clean URL. Production builds fail if `SITE_URL` still points at localhost.
 
 ## Content workflow
 

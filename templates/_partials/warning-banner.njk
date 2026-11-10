@@ -1,14 +1,31 @@
-<div class="site-warning" role="alert" id="site-warning">
+<div class="site-warning" id="site-warning">
   <span class="site-warning-icon" aria-hidden="true">⚠</span>
   <span class="site-warning-text"><strong>Phishing warning:</strong> BlockRocket.tech is not actively hiring or looking for partners. Treat any communication as suspicious. Stay safe out there!</span>
+  <button type="button" class="site-warning-close" id="site-warning-close" aria-label="Dismiss warning">&times;</button>
 </div>
 <script>
   (function () {
     var banner = document.getElementById("site-warning");
+    var close = document.getElementById("site-warning-close");
     if (!banner) return;
     function sync() {
-      document.documentElement.style.setProperty("--site-warning-h", banner.offsetHeight + "px");
+      var h = banner.hidden ? 0 : banner.offsetHeight;
+      var root = document.documentElement.style;
+      root.setProperty("--site-warning-h", h + "px");                                  // content offset
+      root.setProperty("--site-warning-offset", Math.max(0, h - window.scrollY) + "px"); // fixed nav offset
     }
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { sync(); ticking = false; });
+    }, { passive: true });
+    try { if (sessionStorage.getItem("br-warning-dismissed") === "1") banner.hidden = true; } catch (e) {}
+    if (close) close.addEventListener("click", function () {
+      banner.hidden = true;
+      try { sessionStorage.setItem("br-warning-dismissed", "1"); } catch (e) {}
+      sync();
+    });
     sync();
     window.addEventListener("resize", sync);
     window.addEventListener("load", sync);

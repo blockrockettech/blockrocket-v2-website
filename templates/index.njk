@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% set pageTitle = "BlockRocket | Expert Blockchain Engineering & Web3 Consultancy" %}
-  {% set pageDescription = "High-performance blockchain solutions for enterprise and startups. From smart contract auditing to full-stack Web3 engineering, we build production-ready systems." %}
+  {% set pageTitle = "BlockRocket | Web3 & AI builders in Manchester" %}
+  {% set pageDescription = "Manchester founders of KnownOrigin (acquired by eBay); James co-authored EIP-2981. Web3 strategy, smart contract engineering and applied AI." %}
   {% set extraStylesheet = "/css/story.css" %}
   {% include "_partials/head.njk" %}
 </head>
 <body class="body" data-screen-label="Home">
   {% set isHome = true %}
   {% include "_partials/nav.njk" %}
+  <main id="main">
 
   <div id="hero" class="section_hero">
     <div class="container">
@@ -135,7 +136,13 @@
               <div class="job-role">{{ member.role }}</div>
               <div class="body-regular black left">{{ member.bio }}</div>
             </div>
-            <a href="{{ member.linkedin }}" class="linkedin-btn w-inline-block"><img src="/images/linkedin-icon.svg" loading="lazy" width="23.998355865478516" height="24" alt="LinkedIn Icon" class="linkedin-icon"></a>
+            {% set socialIcons = { "GitHub": "github-icon.svg", "X": "x-icon.svg" } %}
+            <div class="team-socials">
+              <a href="{{ member.linkedin }}" class="linkedin-btn w-inline-block" aria-label="{{ member.name }} on LinkedIn" rel="noopener"><img src="/images/linkedin-icon.svg" loading="lazy" width="24" height="24" alt="" class="linkedin-icon"></a>
+              {% for link in member.links %}
+              <a href="{{ link.href }}" class="linkedin-btn w-inline-block" aria-label="{{ member.name }} on {{ link.label }}" rel="noopener"><img src="/images/{{ socialIcons[link.label] }}" loading="lazy" width="24" height="24" alt="" class="linkedin-icon"></a>
+              {% endfor %}
+            </div>
           </div>
         </div>
         {% endfor %}
@@ -155,7 +162,7 @@
             <p class="body-regular left">{{ home.blog.lead }}</p>
           </div>
         </div>
-        <a href="/blog/index.html" class="secondary-button blogs w-button">View More Blogs</a>
+        <a href="/blog/" class="secondary-button blogs w-button">View More Blogs</a>
       </div>
       <div class="w-layout-hflex blog-grid">
         {% for post in latestPosts %}
@@ -180,7 +187,7 @@
         <p class="body-regular left">No posts yet — check back soon.</p>
         {% endfor %}
       </div>
-      <a href="/blog/index.html" class="secondary-button blogs-wide w-button">View More Blogs</a>
+      <a href="/blog/" class="secondary-button blogs-wide w-button">View More Blogs</a>
     </div>
     <img src="/images/half-blocks-right.png" loading="lazy" data-aos="fade-up" alt="" class="right-half-block blog">
     <img src="/images/half-blocks-left.png" loading="lazy" data-aos="fade-up" alt="" class="left-half-block blog">
@@ -237,16 +244,12 @@
             <p class="body-regular left">{{ home.contact.lead }}</p>
           </div>
         </div>
-        <div class="contact-flex">
-          <div class="contact-row"><img src="/images/email.svg" loading="lazy" width="24" height="24" alt="" class="email">
-            <a href="mailto:{{ home.contact.email }}" class="contact-large">{{ home.contact.email }}</a>
-          </div>
-        </div>
       </div>
       <div data-aos="fade-up" class="form-wrapper">
         <div class="form-block w-form">
           <form id="contact-form" name="contact-form" data-name="Contact Form" action="https://formspree.io/f/mbdbjzqz" method="POST" accept-charset="UTF-8" class="form">
             <input type="hidden" name="_subject" value="New BlockRocket website enquiry">
+            <div class="hp-field" aria-hidden="true"><label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
             <label for="contact-name" class="input-label">Name</label>
             <input class="field-row-wrapper w-input" maxlength="256" name="name" data-name="Name" data-fs-field placeholder="Your Name" type="text" id="contact-name" required="">
             <span class="form-field-message" data-fs-error="name" aria-live="polite"></span>
@@ -270,6 +273,8 @@
     <img src="/images/half-blocks-right.png" loading="lazy" data-aos="fade-up" alt="" class="right-half-block contact">
   </div>
 
+  </main>
+
   {% include "_partials/footer.njk" %}
   {% include "_partials/scripts.njk" %}
   <script>
@@ -290,14 +295,13 @@
     "name": "BlockRocket",
     "url": "{{ site.url }}",
     "logo": "{{ site.url }}/images/logo_2.svg",
-    "description": "Expert-led Web3 consultancy based in Manchester. Blockchain strategy, smart contract engineering, and decentralised systems since 2018.",
+    "description": "Founder-led Web3 and AI consultancy in Manchester. Strategy, smart contract engineering and applied AI since 2018.",
     "foundingDate": "2018",
     "foundingLocation": "Manchester, UK",
     "email": "{{ home.contact.email }}",
     "sameAs": [
       "https://www.linkedin.com/company/blockrockettech/",
       "https://twitter.com/blockrockettech",
-      "https://medium.com/blockrocket",
       "https://github.com/blockrockettech"
     ],
     "founders": [

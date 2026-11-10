@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
   {% set pageTitle = "Blog | BlockRocket" %}
-  {% set pageDescription = "High-performance blockchain solutions for enterprise and startups. From smart contract auditing to full-stack Web3 engineering, we build production-ready systems." %}
+  {% set pageDescription = "Engineering write-ups, project stories and frontier-tech notes from the BlockRocket team in Manchester." %}
   {% include "_partials/head.njk" %}
 </head>
 <body class="body" data-screen-label="Blog Index">
   {% set isHome = false %}
   {% include "_partials/nav.njk" %}
+  <main id="main">
 
   <div class="section_header">
     <div class="container blog-header">
       <div class="header-wrapper">
         <div class="breadcrumb-wrapper">
           <a href="/" class="breadcrumb-link">Home</a><img src="/images/chevron_1.svg" loading="lazy" width="16" height="16" alt="" class="icon_chevron">
-          <a href="/blog/index.html" class="breadcrumb-link active-page">Blogs</a>
+          <a href="/blog/" class="breadcrumb-link active-page">Blogs</a>
         </div>
-        <h2 class="h2-style">The Intelligence Hub</h2>
+        <h1 class="h2-style">The Intelligence Hub</h1>
         <div class="w-layout-vflex lead-text">
           <p class="body-regular left">Education is at our core. Explore our latest guides and technical deep-dives to help your business stay ahead on-chain.</p>
         </div>
@@ -106,6 +107,8 @@
       </div>
     </div>
   </div>
+
+  </main>
 
   {% include "_partials/footer.njk" %}
   {% include "_partials/scripts.njk" %}

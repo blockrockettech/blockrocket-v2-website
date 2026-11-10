@@ -8,16 +8,17 @@
 <body class="body" data-screen-label="Blog Post">
   {% set isHome = false %}
   {% include "_partials/nav.njk" %}
+  <main id="main">
 
   <div class="section_header">
     <div class="container blog-child-header">
       <div class="breadcrumb-wrapper">
         <a href="/" class="breadcrumb-link">Home</a><img src="/images/chevron_1.svg" loading="lazy" width="16" height="16" alt="" class="icon_chevron">
-        <a href="/blog/index.html" class="breadcrumb-link">Blogs</a><img src="/images/chevron_1.svg" loading="lazy" width="16" height="16" alt="" class="icon_chevron">
+        <a href="/blog/" class="breadcrumb-link">Blogs</a><img src="/images/chevron_1.svg" loading="lazy" width="16" height="16" alt="" class="icon_chevron">
         <span class="breadcrumb-link active-page">{{ post.title }}</span>
       </div>
       <div class="blog-title-wrapper">
-        <h2 class="h2-style">{{ post.title }}</h2>
+        <h1 class="h2-style">{{ post.title }}</h1>
         <div class="w-layout-vflex lead-text">
           <p class="body-regular left">{{ post.excerpt }}</p>
         </div>
@@ -117,6 +118,8 @@
     </div>
   </div>
   {% endif %}
+
+  </main>
 
   {% include "_partials/footer.njk" %}
   {% include "_partials/scripts.njk" %}
