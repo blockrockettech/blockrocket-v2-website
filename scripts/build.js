@@ -159,10 +159,27 @@ function build() {
   const latestPosts = posts.slice(0, 3);
   const allTags = [...new Set(posts.flatMap(p => (p.tags || []).map(t => t.label)))];
 
+  // Cache-busting token for CSS/JS links. server.js caches static assets for a
+  // day, so changing ?v= whenever any stylesheet or script changes forces
+  // browsers to fetch the new file.
+  const assetVersion = (() => {
+    const hash = require('crypto').createHash('sha1');
+    for (const dir of ['css', 'js']) {
+      const abs = path.join(PUBLIC_DIR, dir);
+      if (!fs.existsSync(abs)) continue;
+      for (const f of fs.readdirSync(abs).sort()) {
+        hash.update(f);
+        hash.update(fs.readFileSync(path.join(abs, f)));
+      }
+    }
+    return hash.digest('hex').slice(0, 10);
+  })();
+
   const siteConfig = {
     url: process.env.SITE_URL || 'http://localhost:3000',
     name: process.env.SITE_NAME || 'BlockRocket',
     gaId: process.env.GA_TRACKING_ID || '',
+    assetVersion,
   };
 
   // Create dist/blog/
