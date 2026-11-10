@@ -452,3 +452,45 @@ End Option A */
 }
 
 End Option C */
+
+/* ---------- Phishing warning banner (templates/_partials/warning-banner.njk) ---------- */
+
+.site-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 24px;
+  background-color: #ffc83d;
+  color: var(--base--black);
+  font-family: Zalando Sans, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.site-warning-icon {
+  font-size: 16px;
+  flex: 0 0 auto;
+}
+
+.body {
+  padding-top: var(--site-warning-h, 40px);
+}
+
+.nav {
+  top: var(--site-warning-h, 40px);
+}
+
+@media screen and (max-width: 479px) {
+  .site-warning {
+    font-size: 13px;
+    padding: 8px 16px;
+    text-align: left;
+  }
+}

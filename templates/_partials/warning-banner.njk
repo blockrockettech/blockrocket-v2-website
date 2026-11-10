@@ -1,0 +1,16 @@
+<div class="site-warning" role="alert" id="site-warning">
+  <span class="site-warning-icon" aria-hidden="true">⚠</span>
+  <span class="site-warning-text"><strong>Phishing warning:</strong> BlockRocket.tech is not actively hiring or looking for partners. Treat any communication as suspicious. Stay safe out there!</span>
+</div>
+<script>
+  (function () {
+    var banner = document.getElementById("site-warning");
+    if (!banner) return;
+    function sync() {
+      document.documentElement.style.setProperty("--site-warning-h", banner.offsetHeight + "px");
+    }
+    sync();
+    window.addEventListener("resize", sync);
+    window.addEventListener("load", sync);
+  })();
+</script>
