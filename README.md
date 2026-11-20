@@ -11,7 +11,7 @@ Built as a static site from a Webflow export. CSS/JS from the Webflow export is 
 | Templating | [Nunjucks](https://mozilla.github.io/nunjucks/) |
 | Content | Markdown files with YAML frontmatter ([gray-matter](https://github.com/jonschlinkert/gray-matter)) |
 | Markdown → HTML | [marked](https://marked.js.org/) |
-| Dev server | [lite-server](https://github.com/johnpapa/lite-server) (browser-sync) |
+| Dev server | [browser-sync](https://browsersync.io/) 3 |
 | File watching | [chokidar](https://github.com/paulmillr/chokidar) |
 | Production server | `server.js` — zero-dependency Node server for `dist/` |
 | Hosting | [Coolify](https://coolify.io) on [Hetzner](https://www.hetzner.com) |
@@ -69,7 +69,7 @@ blockrocket-v2-website/
 │   └── watch.js          ← chokidar watcher for dev
 ├── dist/                 ← generated output (gitignored)
 ├── .env                  ← local env vars (optional, gitignored)
-├── bs-config.js          ← lite-server config (dev only)
+├── bs-config.js          ← browser-sync config (dev only)
 └── server.js             ← production server: static files, clean URLs, /api/health
 ```
 

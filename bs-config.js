@@ -3,5 +3,7 @@ module.exports = {
   files: ['dist/**/*'],
   watchOptions: { ignoreInitial: true },
   port: 3000,
-  notify: false
+  notify: false,
+  open: false,
+  ui: false
 };

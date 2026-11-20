@@ -12,7 +12,7 @@ Static marketing + blog site for BlockRocket (blockrocket.tech). Exported from W
 - **Nunjucks** — HTML templating (`templates/`)
 - **gray-matter** — YAML frontmatter parsing from `.md` / `.mdx` files
 - **marked** — markdown → HTML conversion
-- **lite-server** — dev server (browser-sync wrapper)
+- **browser-sync 3** — dev server with live reload (`bs-config.js`)
 - **chokidar** — file watcher for dev mode
 - **Coolify on Hetzner** — deployment; `server.js` (zero-dependency Node server) serves `dist/`, handles clean URLs, and exposes `GET /api/health`
 - **Formspree AJAX** — homepage contact form submission via CDN-loaded vanilla JS
@@ -224,4 +224,4 @@ Push to `main` — Coolify builds with `npm run build` and runs `npm start` (`no
 - 301s any `*.html` URL to its clean form (query string kept); `/blog/index.html` goes to `/blog/`.
 - Sends security headers on every response (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS, and `Content-Security-Policy-Report-Only`). Watch the browser console for CSP violations before enforcing it.
 - CSS/JS requested with `?v=<hash>` are cached `immutable` for a year; everything else static for a day; HTML is `no-cache`.
-- Dev (`npm run dev`): `bs-config.js` enables clean URLs in lite-server too.
+- Dev (`npm run dev`): `bs-config.js` enables clean URLs in browser-sync too.
