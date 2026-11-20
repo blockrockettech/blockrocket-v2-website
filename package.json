@@ -7,9 +7,9 @@
   },
   "scripts": {
     "build": "node scripts/build.js",
-    "dev": "concurrently \"node scripts/watch.js\" \"lite-server\"",
+    "dev": "concurrently \"node scripts/watch.js\" \"browser-sync start --config bs-config.js\"",
     "start": "node server.js",
-    "serve:dev": "lite-server"
+    "serve:dev": "browser-sync start --config bs-config.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -18,8 +18,8 @@
     "nunjucks": "^3.2.4"
   },
   "devDependencies": {
+    "browser-sync": "^3.0.4",
     "chokidar": "^3.6.0",
-    "concurrently": "^8.2.2",
-    "lite-server": "^2.6.1"
+    "concurrently": "^8.2.2"
   }
 }
